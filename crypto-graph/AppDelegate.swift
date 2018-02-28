@@ -14,9 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var coreDataManager: CoreDataManager?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+
+        coreDataManager = CoreDataManager(modelName: "crypto_graph")
+        coreDataManager?.applicationDocumentsDirectory()
+
+        let apiservice = CoinsAPI(with: APIEndpoint())
+        apiservice.fetchCoin(with: "bitcoin", success: {
+            coin in
+            print(coin)
+        }, failure: {
+            error in
+            print(error)
+        })
         return true
     }
 
@@ -41,9 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
-        self.saveContext()
+        //self.saveContext()
     }
 
+    /*
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
@@ -88,6 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+ */
 
 }
 

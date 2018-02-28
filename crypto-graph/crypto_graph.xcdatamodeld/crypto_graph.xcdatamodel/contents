@@ -1,4 +1,37 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Cryptocurrency" representedClassName="Cryptocurrency" syncable="YES">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="img_url" optional="YES" attributeType="URI" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="rank" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="symbol" attributeType="String" syncable="YES"/>
+        <attribute name="transactions_ids" attributeType="Transformable" customClassName="[Int16]" syncable="YES"/>
+        <relationship name="current_price" maxCount="1" deletionRule="Cascade" destinationEntity="Price" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Price" representedClassName="Price" syncable="YES">
+        <attribute name="btc_price" optional="YES" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="usd_price" optional="YES" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="Transaction" representedClassName="Transaction" syncable="YES">
+        <attribute name="coin_id" attributeType="String" syncable="YES"/>
+        <attribute name="count" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <elements>
+        <element name="Cryptocurrency" positionX="-468" positionY="-171" width="128" height="148"/>
+        <element name="Price" positionX="-189" positionY="-180" width="126" height="75"/>
+        <element name="Transaction" positionX="-693" positionY="-216" width="128" height="103"/>
+    </elements>
 </model>
