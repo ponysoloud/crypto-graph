@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         coreDataManager?.applicationDocumentsDirectory()
 
         let apiservice = CoinsAPI(with: APIEndpoint())
-        apiservice.fetchCoin(with: "bitcoin", success: {
+        apiservice.fetchCoin(with: "ethereum", success: {
             coin in
             print(coin)
         }, failure: {

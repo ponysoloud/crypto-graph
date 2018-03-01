@@ -13,7 +13,7 @@ typealias JSON = [String: Any]
 
 protocol ManagedObjectJSONInitializable {
 
-    init?(in context: NSManagedObjectContext, with json: JSON?)
+    init?(in context: NSManagedObjectContext, with json: JSON, contextDisconnected: Bool)
     //func update(json: JSON)
 
 }

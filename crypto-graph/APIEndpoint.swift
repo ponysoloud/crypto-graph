@@ -75,7 +75,7 @@ class APIEndpoint {
             case let .success(jsonArray):
                 var objects: [T] = []
                 for json in jsonArray {
-                    guard let obj = T(in: self.coreDataManager.context, with: json) else {
+                    guard let obj = T(in: self.coreDataManager.context, with: json, contextDisconnected: false) else {
                         failure(.invalidJSONCorresponding)
                         return
                     }
