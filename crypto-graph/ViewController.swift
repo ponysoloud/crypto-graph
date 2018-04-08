@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, TabBarChildViewController {
+
+    var controllerInstantinationToPresent: UIViewController? {
+        return nil
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

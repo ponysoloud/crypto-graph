@@ -14,22 +14,91 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    var coreDataManager: CoreDataManager?
+    var presenter: PortfolioPresenter!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
 
+        UINavigationBar.appearance().shadowImage = UIImage()
+
+        window = UIWindow(frame: UIScreen.main.bounds)
+
+        let portfolio = ControllerHelper.instantiateViewController(identifier: "PortfolioNavigationController")
+        portfolio.tabBarItem = UITabBarItem(title: "Portfolio", image: #imageLiteral(resourceName: "circle_tabbar"), tag: 0)
+        guard let viewController1 = portfolio as? PortfolioNavigationController else {
+            fatalError()
+        }
+        viewController1.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
+
+        let vc2 = ControllerHelper.instantiateViewController(identifier: "AddTransactionNavigationController")
+        vc2.tabBarItem = UITabBarItem(title: "Add transaction", image: #imageLiteral(resourceName: "rect_tabbar"), tag: 1)
+        let viewController2 = vc2 as! TabBarChildViewController
+
+
+        let vc3 = ControllerHelper.instantiateViewController(identifier: "ViewController")
+        vc3.tabBarItem = UITabBarItem(title: "VC3", image:#imageLiteral(resourceName: "circle_tabbar"), tag: 2)
+        let viewController3 = vc3 as! TabBarChildViewController
+
+        let tabBarController = CustomTabBarController()
+            tabBarController.itemsPresentationsStyle = .onlyImage
+
+        tabBarController.setViewControllers([viewController1, viewController2, viewController3])
+
+        window?.rootViewController = tabBarController
+        window?.makeKeyAndVisible()
+
+        CoreDataManager.shared.applicationDocumentsDirectory()
+        
+
+        /*
+        presenter = PortfolioPresenter(view: nil, portfolioSession: PortfolioSession(coinsAPI: CoinsAPI(context: CoreDataManager.shared.context), fetchedTransactionsController: CoreDataManager.shared.fetchedResultsController(entityName: "Transaction", keyForSort: "date"), portfolioController: PortfolioDataController()))
+
+        presenter.refreshPortfolio()
+
+        let coin = Coin.getManagedObject(by: "btc", in: CoreDataManager.shared.context)!
+        Transaction.insert(into: CoreDataManager.shared.context, coin: coin, type: .buy, quantity: 200, date: Date(), price: 112, currencyType: .usd)
+
+        let coin2 = Coin.getManagedObject(by: "eth", in: CoreDataManager.shared.context)!
+        Transaction.insert(into: CoreDataManager.shared.context, coin: coin2, type: .buy, quantity: 90, date: Date(), price: 90, currencyType: .usd)
+
+ */
+        /*
         coreDataManager = CoreDataManager(modelName: "crypto_graph")
         coreDataManager?.applicationDocumentsDirectory()
 
-        let apiservice = CoinsAPI(with: APIEndpoint())
-        apiservice.fetchCoin(with: "ethereum", success: {
+        let apiservice = CoinsAPI(context: coreDataManager!.context)
+
+        apiservice.fetchCoinPrice(by: "btc", for: Convert(symbol: "EUR"), success: { price in
+            print(price.coinSymbol)
+            print(price.price)
+        }, failure: {
+            print($0)
+        }) */
+
+        /*
+        apiservice.fetchAllCoins(rankFrom: 3, limits: 3, success: {
+            coins in
+            coins.forEach { coin in
+                print(coin)
+                self.coreDataManager!.context.performChanges {
+                    let transaction = Transaction.insert(into: self.coreDataManager!.context, coin: coin, type: .buy, quantity: 150.0, date: Date(), price: 326.0, currencyType: .eur)
+
+                    print(transaction)
+                }
+            }
+        }, failure: {
+            print($0)
+        }) */
+
+        /*
+        apiservice.fetchCoin(with: "eth", success: {
             coin in
+            print(coin.name)
             print(coin)
         }, failure: {
             error in
             print(error)
-        })
+        }) */
         return true
     }
 
@@ -56,53 +125,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         //self.saveContext()
     }
-
-    /*
-    // MARK: - Core Data stack
-
-    lazy var persistentContainer: NSPersistentContainer = {
-        /*
-         The persistent container for the application. This implementation
-         creates and returns a container, having loaded the store for the
-         application to it. This property is optional since there are legitimate
-         error conditions that could cause the creation of the store to fail.
-        */
-        let container = NSPersistentContainer(name: "crypto_graph")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 
-                /*
-                 Typical reasons for an error here include:
-                 * The parent directory does not exist, cannot be created, or disallows writing.
-                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
-                 * The device is out of space.
-                 * The store could not be migrated to the current model version.
-                 Check the error message to determine what the actual problem was.
-                 */
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-
-    // MARK: - Core Data Saving support
-
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
-            }
-        }
-    }
- */
 
 }
 
