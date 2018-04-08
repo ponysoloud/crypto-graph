@@ -16,4 +16,22 @@ extension NSManagedObjectContext {
         return obj
     }
 
+    func saveOrRollback() -> Bool {
+        do {
+            try save()
+            print("Save")
+            return true
+        } catch {
+            rollback()
+            print("Error: \(error.localizedDescription)")
+            return false
+        }
+    }
+
+    func performChanges(block: @escaping () -> ()) {
+        perform {
+            block()
+            _ = self.saveOrRollback()
+        }
+    }
 }

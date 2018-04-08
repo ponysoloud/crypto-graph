@@ -11,6 +11,8 @@ import CoreData
 
 final class CoreDataManager {
 
+    static let shared = CoreDataManager(modelName: "crypto_graph")
+
     // MARK: - Properties
 
     private let modelName: String
@@ -82,5 +84,15 @@ final class CoreDataManager {
         if let url = FileManager.default.urls(for: .libraryDirectory, in: .userDomainMask).last {
             print(url.absoluteString)
         }
+    }
+
+    func fetchedResultsController<T: NSManagedObject>(entityName: String, keyForSort: String) -> NSFetchedResultsController<T> {
+        let fetchRequest = NSFetchRequest<T>(entityName: entityName)
+        let sortDescriptor = NSSortDescriptor(key: keyForSort, ascending: true)
+        fetchRequest.sortDescriptors = [sortDescriptor]
+
+        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.context, sectionNameKeyPath: nil, cacheName: nil)
+
+        return fetchedResultsController
     }
 }
