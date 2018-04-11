@@ -16,13 +16,13 @@ class TransactionsListViewController: UITableViewController, TabBarChildViewCont
     private var transactionsData: [TransactionViewData] = []
     private var chartPieces: [Piece] = []
 
-    private var newTasksOrder: [() -> Void] = []
+    private var tableViewOperations: [()->Void] = []
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        newTasksOrder.forEach { $0() }
-        newTasksOrder = []
+        tableViewOperations.forEach { $0() }
+        tableViewOperations = []
     }
 
     override func viewDidLoad() {
@@ -39,7 +39,7 @@ class TransactionsListViewController: UITableViewController, TabBarChildViewCont
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let additional = chartPieces > 0 ? 1 : 0
+        let additional = chartPieces.count > 0 ? 1 : 0
         return transactionsData.count + additional
     }
 
@@ -87,34 +87,73 @@ extension TransactionsListViewController: TransactionItemDelegate {
 extension TransactionsListViewController: TransactionsListView {
 
     func remove(at index: Int) {
+
         let task = {
+            self.tableView.beginUpdates()
+
             self.transactionsData.remove(at: index)
+
             let indexPath = IndexPath(row: index + 1, section: 0)
             self.tableView.deleteRows(at: [indexPath], with: .fade)
+
+            self.tableView.endUpdates()
         }
 
-        if (self.isViewLoaded && (self.view.window != nil)) {
+        if (self.isViewLoaded && self.view.window != nil){
             task()
         } else {
-            newTasksOrder.append(task)
+            tableViewOperations.append(task)
         }
     }
 
     func insert(data: TransactionViewData, at index: Int) {
         let task = {
+            self.tableView.beginUpdates()
+
             self.transactionsData.insert(data, at: index)
+
             let indexPath = IndexPath(row: index + 1, section: 0)
             self.tableView.insertRows(at: [indexPath], with: .bottom)
+
+            self.tableView.endUpdates()
         }
 
-        if (self.isViewLoaded && (self.view.window != nil)) {
+        if (self.isViewLoaded && self.view.window != nil){
             task()
         } else {
-            newTasksOrder.append(task)
+            tableViewOperations.append(task)
         }
     }
 
-    func provide(chart data: [CoinChartData]) {
+    func updateChart(with data: [CoinChartData]) {
+        let palette: [UIColor] = [
+            UIColor(hex: 0x32A2F3),
+            UIColor(hex: 0xFCD739),
+            UIColor(hex: 0x71769B),
+            UIColor(hex: 0xA7DA66)
+        ]
+
+        let wasEmpty = chartPieces.isEmpty
+
+        chartPieces = data.enumerated().map {
+            let color = palette[$0.offset % palette.count]
+            return Piece(color: color, value: CGFloat($0.element.value), name: $0.element.coinName)
+        }
+
+        let indexPath = IndexPath(row: 0, section: 0)
+
+        if wasEmpty && chartPieces.isEmpty {
+            return
+        } else if wasEmpty {
+            tableView.insertRows(at: [indexPath], with: .none)
+        } else if chartPieces.isEmpty {
+            tableView.deleteRows(at: [indexPath], with: .none)
+        } else {
+            tableView.reloadRows(at: [indexPath], with: .none)
+        }
+    }
+
+    func provide(chart data: [CoinChartData], transactions: [TransactionViewData]) {
         let palette: [UIColor] = [
             UIColor(hex: 0x32A2F3),
             UIColor(hex: 0xFCD739),
@@ -126,13 +165,35 @@ extension TransactionsListViewController: TransactionsListView {
             let color = palette[$0.offset % palette.count]
             return Piece(color: color, value: CGFloat($0.element.value), name: $0.element.coinName)
         }
-
-        let indexPath = IndexPath(row: 0, section: 0)
-        tableView.reloadRows(at: [indexPath], with: .left)
+        transactionsData = transactions
+        tableView.reloadData()
     }
 
-    func provide(data: [TransactionViewData]) {
-        transactionsData = data
-        tableView.reloadData()
+    func show(placeholder message: String, isVisible: Bool) {
+        if isVisible {
+            if let _ = view.viewWithTag(11) {
+                return
+            }
+
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
+            label.text = message
+            label.textColor = UIColor(hex: 0xD5D5D5)
+            label.tag = 11
+
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            view.addSubview(label)
+
+            label.centerXAnchor.constraint(equalTo: tableView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: tableView.centerYAnchor).isActive = true
+        } else {
+            guard let label = view.viewWithTag(11) else {
+                return
+            }
+
+            label.removeFromSuperview()
+        }
     }
 }

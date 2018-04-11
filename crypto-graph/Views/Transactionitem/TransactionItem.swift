@@ -27,6 +27,11 @@ class TransactionItem: UITableViewCell {
     @IBOutlet private var typeLabel: UILabel!
 
     @IBOutlet private var removeButton: UIButton!
+
+    @IBOutlet private var nameWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var priceWidthConstraint: NSLayoutConstraint!
+
+    @IBOutlet private var quantityAndTypeContraint: NSLayoutConstraint!
     
     weak var delegate: TransactionItemDelegate?
 
@@ -34,6 +39,7 @@ class TransactionItem: UITableViewCell {
         super.awakeFromNib()
         layoutIfNeeded()
         setupStyle()
+        setLayouts()
     }
 
     func setup(with data: TransactionViewData) {
@@ -78,6 +84,24 @@ class TransactionItem: UITableViewCell {
         self.innerContentView.layer.shadowOffset = CGSize(width: 0, height: 3)
         self.innerContentView.layer.shadowRadius = 5
         self.innerContentView.layer.shadowOpacity = 0.05
+    }
+
+    private func setLayouts() {
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small, .unknown:
+            nameWidthConstraint.constant = 50.0
+            priceWidthConstraint.constant = 50.0
+            quantityAndTypeContraint.constant = 10.0
+        case .medium:
+            nameWidthConstraint.constant = 60.0
+            priceWidthConstraint.constant = 55.0
+            quantityAndTypeContraint.constant = 15.0
+        case .plus, .extra:
+            nameWidthConstraint.constant = 70.0
+            priceWidthConstraint.constant = 75.0
+            quantityAndTypeContraint.constant = 30.0
+        }
+        layoutIfNeeded()
     }
 
 }

@@ -23,9 +23,10 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
     @IBOutlet private var changeHintText: UILabel!
     @IBOutlet private var profitHintText: UILabel!
 
-    private var headerView: PortfolioHeaderView!
+    @IBOutlet private var nameWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var priceRangeConstraint: NSLayoutConstraint!
 
-    private var newTasksOrder: [() -> Void] = []
+    private var headerView: PortfolioHeaderView!
 
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
@@ -37,12 +38,13 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
         return refreshControl
     }()
 
+    private var tableViewOperations: [()->Void] = []
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        newTasksOrder.forEach { $0() }
-        
-        newTasksOrder = []
+        tableViewOperations.forEach { $0() }
+        tableViewOperations = []
     }
 
     override func viewDidLoad() {
@@ -80,6 +82,17 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 
         coinNameHintText.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 7.0).isActive = true
 
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small, .unknown:
+            nameWidthConstraint.constant = 50.0
+        case .medium:
+            nameWidthConstraint.constant = 68.0
+            priceRangeConstraint.constant = 56.0
+        case .plus, .extra:
+            nameWidthConstraint.constant = 70.0
+            priceRangeConstraint.constant = 73.0
+        }
+
         view.layoutIfNeeded()
     }
 
@@ -96,6 +109,7 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 extension PortfolioViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("IN NUMBER \(portfolioData.count)")
         return portfolioData.count
     }
 
@@ -160,48 +174,89 @@ extension PortfolioViewController: PortfolioView {
     }
 
     func append(_ newObject: CoinTransactionsViewData) {
+
         let task = {
-            print("Append to view \(newObject.coinName)")
+            self.portfolioTableView.beginUpdates()
+
             self.portfolioData.append(newObject)
 
             let indexPath = IndexPath(row: self.portfolioData.count - 1, section: 0)
             self.portfolioTableView.insertRows(at: [indexPath], with: .bottom)
+
+            self.portfolioTableView.endUpdates()
         }
 
-        if (self.isViewLoaded && (self.view.window != nil)) {
+        if (self.isViewLoaded && self.view.window != nil){
             task()
         } else {
-            newTasksOrder.append(task)
+            tableViewOperations.append(task)
         }
     }
 
     func updateObject(existingAt index: Int, with object: CoinTransactionsViewData) {
         let task = {
-            print("Update \(object.coinName)")
+            self.portfolioTableView.beginUpdates()
+
             self.portfolioData[index] = object
+
             let indexPath = IndexPath(row: index, section: 0)
             self.portfolioTableView.reloadRows(at: [indexPath], with: .none)
+
+            self.portfolioTableView.endUpdates()
         }
 
-        if (self.isViewLoaded && (self.view.window != nil)) {
+        if (self.isViewLoaded && self.view.window != nil){
             task()
         } else {
-            newTasksOrder.append(task)
+            tableViewOperations.append(task)
         }
     }
 
     func remove(at index: Int) {
+
         let task = {
-            print("Remove at \(index)")
+            self.portfolioTableView.beginUpdates()
+
             self.portfolioData.remove(at: index)
+
             let indexPath = IndexPath(row: index, section: 0)
             self.portfolioTableView.deleteRows(at: [indexPath], with: .fade)
+
+            self.portfolioTableView.endUpdates()
         }
 
-        if (self.isViewLoaded && (self.view.window != nil)) {
+        if (self.isViewLoaded && self.view.window != nil){
             task()
         } else {
-            newTasksOrder.append(task)
+            tableViewOperations.append(task)
+        }
+    }
+
+    func show(placeholder message: String, isVisible: Bool) {
+        if isVisible {
+            if let _ = view.viewWithTag(11) {
+                return
+            }
+
+            let label = UILabel()
+            label.numberOfLines = 0
+            label.font = UIFont.systemFont(ofSize: 26, weight: .medium)
+            label.text = message
+            label.textColor = UIColor(hex: 0xD5D5D5)
+            label.tag = 11
+
+            label.translatesAutoresizingMaskIntoConstraints = false
+
+            view.addSubview(label)
+
+            label.centerXAnchor.constraint(equalTo: portfolioTableView.centerXAnchor).isActive = true
+            label.centerYAnchor.constraint(equalTo: portfolioTableView.centerYAnchor).isActive = true
+        } else {
+            guard let label = view.viewWithTag(11) else {
+                return
+            }
+
+            label.removeFromSuperview()
         }
     }
 }

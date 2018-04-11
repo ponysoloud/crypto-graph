@@ -22,10 +22,14 @@ class PortfolioCoinItem: UITableViewCell {
     @IBOutlet private var changeLabel: UILabel!
     @IBOutlet private var profitLabel: UILabel!
 
+    @IBOutlet private var nameWidthConstraint: NSLayoutConstraint!
+    @IBOutlet private var priceWidthConstraint: NSLayoutConstraint!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         layoutIfNeeded()
         setupStyle()
+        setLayouts()
     }
 
     func setup(with data: CoinTransactionsViewData) {
@@ -72,6 +76,21 @@ class PortfolioCoinItem: UITableViewCell {
         self.innerContentView.layer.shadowOffset = CGSize(width: 0, height: 3)
         self.innerContentView.layer.shadowRadius = 5
         self.innerContentView.layer.shadowOpacity = 0.05
+    }
+
+    private func setLayouts() {
+        switch UIDevice.current.screenType {
+        case .extraSmall, .small, .unknown:
+            nameWidthConstraint.constant = 50.0
+            priceWidthConstraint.constant = 50.0
+        case .medium:
+            nameWidthConstraint.constant = 62.0
+            priceWidthConstraint.constant = 65.0
+        case .plus, .extra:
+            nameWidthConstraint.constant = 70.0
+            priceWidthConstraint.constant = 76.0
+        }
+        layoutIfNeeded()
     }
 
 }

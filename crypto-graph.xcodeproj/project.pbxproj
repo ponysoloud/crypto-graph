@@ -58,6 +58,7 @@
 		935F9AFB206C0863008B0E66 /* ManagedContextInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AFA206C0863008B0E66 /* ManagedContextInitializable.swift */; };
 		935F9AFD206C0FFA008B0E66 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AFC206C0FFA008B0E66 /* Mapper.swift */; };
 		935F9AFF206C415E008B0E66 /* ConcurrentBlocksArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AFE206C415E008B0E66 /* ConcurrentBlocksArray.swift */; };
+		93B1B05F207EA38D00106D4D /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93B1B05E207EA38D00106D4D /* UIDevice+Extensions.swift */; };
 		93C5E2A2206D1B78007ED48E /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C5E2A1206D1B78007ED48E /* ImageManager.swift */; };
 		93C5E2A4206D5FDE007ED48E /* ExtendedCoinPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C5E2A3206D5FDE007ED48E /* ExtendedCoinPrice.swift */; };
 		93C5E2A6206D6276007ED48E /* Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93C5E2A5206D6276007ED48E /* Convert.swift */; };
@@ -133,6 +134,7 @@
 		935F9AFA206C0863008B0E66 /* ManagedContextInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContextInitializable.swift; sourceTree = "<group>"; };
 		935F9AFC206C0FFA008B0E66 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
 		935F9AFE206C415E008B0E66 /* ConcurrentBlocksArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcurrentBlocksArray.swift; sourceTree = "<group>"; };
+		93B1B05E207EA38D00106D4D /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		93C5E2A1206D1B78007ED48E /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
 		93C5E2A3206D5FDE007ED48E /* ExtendedCoinPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedCoinPrice.swift; sourceTree = "<group>"; };
 		93C5E2A5206D6276007ED48E /* Convert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Convert.swift; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 				93CC6819204745FC00F5BE75 /* NSManagedObjectContext+Extensions.swift */,
 				9341CC5A20741A3700A21F7F /* DateFormatter+Extensions.swift */,
 				9341CC842077FD6400A21F7F /* String+Extensions.swift */,
+				93B1B05E207EA38D00106D4D /* UIDevice+Extensions.swift */,
 				93219345207A8F2E00273DAF /* Int+Extensions.swift */,
 				93219347207A909B00273DAF /* UIColor+Extensions.swift */,
 				93219350207AC38300273DAF /* CGPoint+Extensions.swift */,
@@ -604,6 +607,7 @@
 				93CC6827204745FE00F5BE75 /* NSManagedObjectContext+Extensions.swift in Sources */,
 				93C5E2A4206D5FDE007ED48E /* ExtendedCoinPrice.swift in Sources */,
 				9341CC6E20765F9900A21F7F /* PortfolioViewController.swift in Sources */,
+				93B1B05F207EA38D00106D4D /* UIDevice+Extensions.swift in Sources */,
 				9341CC65207515FF00A21F7F /* EnterTransactionDetailsViewPresenter.swift in Sources */,
 				93219351207AC38300273DAF /* CGPoint+Extensions.swift in Sources */,
 				9341CC5D20741D0800A21F7F /* ControllerHelper.swift in Sources */,

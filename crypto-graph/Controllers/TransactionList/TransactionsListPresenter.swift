@@ -49,8 +49,11 @@ class TransactionsListPresenter: NSObject {
         }
         chartData = evaluateGraphData(from: transactions)
 
-        view?.provide(chart: chartData)
-        view?.provide(data: transactionsViewData)
+        if chartData.isEmpty && transactionsViewData.isEmpty {
+            view?.show(placeholder: "No transactions", isVisible: true)
+        } else {
+            view?.provide(chart: chartData, transactions: transactionsViewData)
+        }
     }
 
     func refreshChart() {
@@ -58,8 +61,7 @@ class TransactionsListPresenter: NSObject {
             return
         }
         chartData = evaluateGraphData(from: transactions)
-
-        view?.provide(chart: chartData)
+        view?.updateChart(with: chartData)
     }
 
     func removeTransaction(at index: Int) {
@@ -67,7 +69,6 @@ class TransactionsListPresenter: NSObject {
             return
         }
 
-        print("///////VC3 delete save")
         context.performChanges {
             self.context.delete(objects[index])
         }
@@ -108,14 +109,22 @@ extension TransactionsListPresenter: NSFetchedResultsControllerDelegate {
 
         switch type {
         case .insert:
+            view?.show(placeholder: "No transactions", isVisible: false)
+
             let object = buildViewData(from: transaction)
             transactionsViewData.insert(object, at: newIndexPath!.row)
             view?.insert(data: object, at: newIndexPath!.row)
+
             refreshChart()
         case .delete:
             transactionsViewData.remove(at: indexPath!.row)
             view?.remove(at: indexPath!.row)
+            
             refreshChart()
+
+            if transactionsViewData.isEmpty {
+                view?.show(placeholder: "No transactions", isVisible: true)
+            }
             return
         default:
             return

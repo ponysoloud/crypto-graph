@@ -20,5 +20,5 @@ protocol PortfolioView: class {
 
     func remove(at index: Int)
 
-    func show(placeholder message: String)
+    func show(placeholder message: String, isVisible: Bool)
 }

@@ -38,7 +38,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="-10.3%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="na0-AC-dF8">
-                                <rect key="frame" x="297" y="18.5" width="88" height="18"/>
+                                <rect key="frame" x="292" y="18.5" width="93" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -53,7 +53,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-10.3%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alk-ya-IEb">
-                                <rect key="frame" x="239" y="18.5" width="51" height="18"/>
+                                <rect key="frame" x="234" y="18.5" width="51" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -65,13 +65,13 @@
                             <constraint firstItem="rYs-qy-WP8" firstAttribute="leading" secondItem="saj-By-87a" secondAttribute="leading" constant="11" id="3xM-CD-Q4g"/>
                             <constraint firstAttribute="trailing" secondItem="na0-AC-dF8" secondAttribute="trailing" constant="16" id="88P-a4-RRw"/>
                             <constraint firstItem="hYo-Tn-YeR" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="H52-YS-35M"/>
-                            <constraint firstItem="alk-ya-IEb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="7" id="H6p-XW-Asm"/>
+                            <constraint firstItem="alk-ya-IEb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="5" id="H6p-XW-Asm"/>
                             <constraint firstItem="na0-AC-dF8" firstAttribute="leading" secondItem="alk-ya-IEb" secondAttribute="trailing" constant="7" id="RnQ-FV-HrA"/>
                             <constraint firstItem="na0-AC-dF8" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="XiT-ax-m9i"/>
                             <constraint firstAttribute="bottom" secondItem="rYs-qy-WP8" secondAttribute="bottom" constant="8" id="YMZ-bq-aQC"/>
                             <constraint firstItem="alk-ya-IEb" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="fNu-cf-JMr"/>
                             <constraint firstItem="rYs-qy-WP8" firstAttribute="top" secondItem="saj-By-87a" secondAttribute="top" constant="8" id="maY-fS-q87"/>
-                            <constraint firstItem="alk-ya-IEb" firstAttribute="trailing" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="77" id="ns1-1O-uwY"/>
+                            <constraint firstItem="alk-ya-IEb" firstAttribute="trailing" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="72" id="ns1-1O-uwY"/>
                             <constraint firstItem="Rm3-Py-UMZ" firstAttribute="centerY" secondItem="rYs-qy-WP8" secondAttribute="centerY" id="oWh-L3-11J"/>
                             <constraint firstItem="Rm3-Py-UMZ" firstAttribute="leading" secondItem="rYs-qy-WP8" secondAttribute="trailing" constant="10" id="ojb-1H-sSm"/>
                             <constraint firstItem="hYo-Tn-YeR" firstAttribute="leading" secondItem="Rm3-Py-UMZ" secondAttribute="trailing" constant="7" id="uWP-Pm-Jm1"/>
@@ -90,7 +90,9 @@
                 <outlet property="coinNameLabel" destination="Rm3-Py-UMZ" id="DHh-Ks-z2P"/>
                 <outlet property="iconImageView" destination="rYs-qy-WP8" id="mcE-N7-OSn"/>
                 <outlet property="innerContentView" destination="saj-By-87a" id="wAl-Jb-Pkq"/>
+                <outlet property="nameWidthConstraint" destination="2Wo-2L-zdr" id="y4P-f5-9UY"/>
                 <outlet property="priceLabel" destination="hYo-Tn-YeR" id="YP4-sg-Lvy"/>
+                <outlet property="priceWidthConstraint" destination="992-g3-j2d" id="K66-9d-69v"/>
                 <outlet property="profitLabel" destination="na0-AC-dF8" id="9m6-Vb-Rg9"/>
             </connections>
             <point key="canvasLocation" x="-173.5" y="-86.5"/>

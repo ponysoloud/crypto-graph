@@ -78,9 +78,10 @@
                 <constraint firstItem="E7u-5d-x1d" firstAttribute="trailing" secondItem="n9k-PA-6Mg" secondAttribute="trailing" id="gB9-6w-b0D"/>
                 <constraint firstItem="v4N-fP-ciV" firstAttribute="top" secondItem="7yL-xM-05A" secondAttribute="top" constant="19" id="j84-LU-EDC"/>
                 <constraint firstItem="Cfd-G7-Xc5" firstAttribute="bottom" secondItem="2Ts-mC-NQN" secondAttribute="bottom" id="pR8-td-5Tv"/>
-                <constraint firstItem="wgw-gp-uPj" firstAttribute="leading" secondItem="7yL-xM-05A" secondAttribute="centerX" constant="-30" id="qEW-c0-3p4"/>
+                <constraint firstItem="wgw-gp-uPj" firstAttribute="leading" secondItem="7yL-xM-05A" secondAttribute="centerX" priority="999" constant="-30" id="qEW-c0-3p4"/>
                 <constraint firstItem="wgw-gp-uPj" firstAttribute="leading" secondItem="Cfd-G7-Xc5" secondAttribute="leading" id="rgb-t3-CPt"/>
                 <constraint firstItem="wgw-gp-uPj" firstAttribute="top" secondItem="v4N-fP-ciV" secondAttribute="top" id="tfM-pP-IWD"/>
+                <constraint firstItem="wgw-gp-uPj" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="v4N-fP-ciV" secondAttribute="trailing" constant="12.5" id="yNp-f8-Xst"/>
                 <constraint firstItem="2Ts-mC-NQN" firstAttribute="top" secondItem="v4N-fP-ciV" secondAttribute="bottom" constant="3" id="zAG-dT-4X8"/>
                 <constraint firstItem="RCK-Uv-j8M" firstAttribute="bottom" secondItem="2Ts-mC-NQN" secondAttribute="bottom" id="zaF-1T-6v2"/>
             </constraints>

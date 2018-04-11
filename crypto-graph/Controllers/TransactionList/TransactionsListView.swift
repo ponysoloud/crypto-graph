@@ -8,14 +8,13 @@
 
 protocol TransactionsListView: class {
 
-    func provide(data: [TransactionViewData])
+    func provide(chart data: [CoinChartData], transactions: [TransactionViewData])
 
-    func provide(chart data: [CoinChartData])
+    func updateChart(with data: [CoinChartData])
 
     func insert(data: TransactionViewData, at index: Int)
 
     func remove(at index: Int)
 
-    func show(placeholder message: String)
-    
+    func show(placeholder message: String, isVisible: Bool)
 }

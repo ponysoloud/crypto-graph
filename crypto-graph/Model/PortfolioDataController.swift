@@ -48,7 +48,10 @@ class PortfolioDataController {
         }
 
         let target = objects[targetIndex]
-        try! target.subtract(transaction: transaction)
+        do {
+            try target.subtract(transaction: transaction)
+        } catch {
+        }
 
         if target.isEmpty {
             delegate?.controller(self, didRemove: target, from: targetIndex)

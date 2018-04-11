@@ -32,6 +32,8 @@ class PortfolioPresenter {
             buildViewData(from: $0)
         }
 
+        view?.show(placeholder: "No transactions", isVisible: portfolioViewData.isEmpty)
+
         view?.updateHeader(with: portfolioTotalViewData)
         view?.provide(data: portfolioViewData)
     }
@@ -79,6 +81,7 @@ extension PortfolioPresenter: PortfolioSessionDelegate {
         DispatchQueue.main.async {
             let viewData = self.buildViewData(from: coinTransactionsObject)
             self.view?.append(viewData)
+            self.view?.show(placeholder: "No transactions", isVisible: false)
         }
 
         print("ADD: - coin: \(coinTransactionsObject.coin.name) coinPrice: \(coinTransactionsObject.coin.price ?? 0)  amount: \(coinTransactionsObject.amount) price: \(coinTransactionsObject.avgBuyPrice) cost: \(coinTransactionsObject.cost)")

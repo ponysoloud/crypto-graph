@@ -41,8 +41,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         guard let transactionsVC = _transactionsVC as? TransactionsListViewController else {
             fatalError()
         }
-
         transactionsVC.tabBarItem = UITabBarItem(title: "Transactions", image: #imageLiteral(resourceName: "pie_tabbar"), tag: 2)
+
 
         let tabBarController = CustomTabBarController()
             tabBarController.itemsPresentationsStyle = .onlyImage

@@ -50,19 +50,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgA-9z-uCA">
-                                <rect key="frame" x="186" y="144" width="32" height="16"/>
+                                <rect key="frame" x="183" y="144" width="32" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="Change" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6e-pT-GoT">
-                                <rect key="frame" x="223" y="144" width="75" height="16"/>
+                                <rect key="frame" x="220" y="144" width="73" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Profit" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4MS-ZR-jCt">
-                                <rect key="frame" x="303" y="144" width="45" height="16"/>
+                                <rect key="frame" x="298" y="144" width="50" height="16"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
                                 <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -96,8 +96,8 @@
                             <constraint firstItem="i3Y-Uo-HRE" firstAttribute="trailing" secondItem="2uS-0e-Zq5" secondAttribute="trailing" id="I2w-vd-Knm"/>
                             <constraint firstItem="2uS-0e-Zq5" firstAttribute="trailing" secondItem="4MS-ZR-jCt" secondAttribute="trailing" constant="27" id="Isz-rO-GxO"/>
                             <constraint firstItem="Q6e-pT-GoT" firstAttribute="top" secondItem="aJR-a7-5Kd" secondAttribute="top" id="KgI-B0-3Ow"/>
-                            <constraint firstItem="pgA-9z-uCA" firstAttribute="trailing" secondItem="aJR-a7-5Kd" secondAttribute="trailing" constant="83" id="LTF-c8-OsK"/>
-                            <constraint firstItem="Q6e-pT-GoT" firstAttribute="trailing" secondItem="pgA-9z-uCA" secondAttribute="trailing" constant="80" id="MLC-1a-6sv"/>
+                            <constraint firstItem="pgA-9z-uCA" firstAttribute="trailing" secondItem="aJR-a7-5Kd" secondAttribute="trailing" constant="80" id="LTF-c8-OsK"/>
+                            <constraint firstItem="Q6e-pT-GoT" firstAttribute="trailing" secondItem="pgA-9z-uCA" secondAttribute="trailing" constant="78" id="MLC-1a-6sv"/>
                             <constraint firstItem="Ydy-gR-A3K" firstAttribute="trailing" secondItem="2uS-0e-Zq5" secondAttribute="trailing" id="PJg-4n-vf5"/>
                             <constraint firstItem="4MS-ZR-jCt" firstAttribute="leading" secondItem="Q6e-pT-GoT" secondAttribute="trailing" constant="5" id="TSm-KQ-koZ"/>
                             <constraint firstItem="pgA-9z-uCA" firstAttribute="top" secondItem="aJR-a7-5Kd" secondAttribute="top" id="ZF5-Qh-iPg"/>
@@ -112,8 +112,10 @@
                     <connections>
                         <outlet property="changeHintText" destination="Q6e-pT-GoT" id="XJ0-MF-tbV"/>
                         <outlet property="coinNameHintText" destination="aJR-a7-5Kd" id="YuW-2z-66K"/>
+                        <outlet property="nameWidthConstraint" destination="Qpv-sh-Ebc" id="t79-gl-5Ei"/>
                         <outlet property="portfolioTableView" destination="i3Y-Uo-HRE" id="HOI-Qn-wcD"/>
                         <outlet property="priceHintText" destination="pgA-9z-uCA" id="QeU-Q2-uFN"/>
+                        <outlet property="priceRangeConstraint" destination="LTF-c8-OsK" id="vVH-2j-x1f"/>
                         <outlet property="profitHintText" destination="4MS-ZR-jCt" id="bHb-Ra-yDm"/>
                         <outlet property="titleView" destination="Ydy-gR-A3K" id="17l-Mq-iTW"/>
                     </connections>
@@ -358,7 +360,7 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="J6v-D0-gwW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="0.96862745100000003" green="0.97647058819999999" blue="0.98823529409999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.93725490196078431" green="0.95294117647058818" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                         <connections>
                             <outlet property="dataSource" destination="SPS-LV-eQ4" id="RdG-5Q-Uwg"/>
                             <outlet property="delegate" destination="SPS-LV-eQ4" id="7cI-Hc-ax5"/>
