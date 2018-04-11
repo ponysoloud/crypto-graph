@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930CA3BC207D19C60052DAD0 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BB207D19C60052DAD0 /* PieChartView.swift */; };
+		930CA3BE207D1D000052DAD0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */; };
+		930CA3C0207D21AA0052DAD0 /* PiecePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BF207D21AA0052DAD0 /* PiecePath.swift */; };
+		930CA3C3207D257A0052DAD0 /* TransactionsChart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930CA3C2207D257A0052DAD0 /* TransactionsChart.xib */; };
+		930CA3C5207D269E0052DAD0 /* TransactionsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3C4207D269E0052DAD0 /* TransactionsChart.swift */; };
+		930CA3C8207D3FDD0052DAD0 /* TransactionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930CA3C7207D3FDD0052DAD0 /* TransactionItem.xib */; };
+		930CA3CA207D43040052DAD0 /* TransactionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3C9207D43040052DAD0 /* TransactionItem.swift */; };
 		93219346207A8F2E00273DAF /* Int+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93219345207A8F2E00273DAF /* Int+Extensions.swift */; };
 		93219348207A909B00273DAF /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93219347207A909B00273DAF /* UIColor+Extensions.swift */; };
 		9321934A207AC26400273DAF /* CustomTransitionNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93219349207AC26400273DAF /* CustomTransitionNavigationController.swift */; };
@@ -75,6 +82,13 @@
 		3AC019C8CAE90372AB7F589A /* Pods-crypto-graph.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crypto-graph.debug.xcconfig"; path = "Pods/Target Support Files/Pods-crypto-graph/Pods-crypto-graph.debug.xcconfig"; sourceTree = "<group>"; };
 		4A8E082030513B29A1952D5F /* Pods-crypto-graph.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-crypto-graph.release.xcconfig"; path = "Pods/Target Support Files/Pods-crypto-graph/Pods-crypto-graph.release.xcconfig"; sourceTree = "<group>"; };
 		6C034D56A11FE2CF5C550435 /* Pods_crypto_graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_crypto_graph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		930CA3BB207D19C60052DAD0 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
+		930CA3BF207D21AA0052DAD0 /* PiecePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecePath.swift; sourceTree = "<group>"; };
+		930CA3C2207D257A0052DAD0 /* TransactionsChart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsChart.xib; sourceTree = "<group>"; };
+		930CA3C4207D269E0052DAD0 /* TransactionsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsChart.swift; sourceTree = "<group>"; };
+		930CA3C7207D3FDD0052DAD0 /* TransactionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionItem.xib; sourceTree = "<group>"; };
+		930CA3C9207D43040052DAD0 /* TransactionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItem.swift; sourceTree = "<group>"; };
 		93219345207A8F2E00273DAF /* Int+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+Extensions.swift"; sourceTree = "<group>"; };
 		93219347207A909B00273DAF /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		93219349207AC26400273DAF /* CustomTransitionNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTransitionNavigationController.swift; sourceTree = "<group>"; };
@@ -160,6 +174,33 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		930CA3C1207D21E00052DAD0 /* PieChart */ = {
+			isa = PBXGroup;
+			children = (
+				930CA3BB207D19C60052DAD0 /* PieChartView.swift */,
+				930CA3BF207D21AA0052DAD0 /* PiecePath.swift */,
+			);
+			path = PieChart;
+			sourceTree = "<group>";
+		};
+		930CA3C6207D28610052DAD0 /* TransactionsChart */ = {
+			isa = PBXGroup;
+			children = (
+				930CA3C4207D269E0052DAD0 /* TransactionsChart.swift */,
+				930CA3C2207D257A0052DAD0 /* TransactionsChart.xib */,
+			);
+			path = TransactionsChart;
+			sourceTree = "<group>";
+		};
+		930CA3CB207D44060052DAD0 /* Transactionitem */ = {
+			isa = PBXGroup;
+			children = (
+				930CA3C9207D43040052DAD0 /* TransactionItem.swift */,
+				930CA3C7207D3FDD0052DAD0 /* TransactionItem.xib */,
+			);
+			path = Transactionitem;
+			sourceTree = "<group>";
+		};
 		9321934F207AC2C800273DAF /* CustomTransition for NavigationController */ = {
 			isa = PBXGroup;
 			children = (
@@ -183,10 +224,13 @@
 			isa = PBXGroup;
 			children = (
 				9341CC492073E16900A21F7F /* LargeButton.swift */,
+				930CA3CB207D44060052DAD0 /* Transactionitem */,
+				930CA3C6207D28610052DAD0 /* TransactionsChart */,
 				9341CC98207A795200A21F7F /* PortfolioHeaderView */,
 				9341CC7C2077D56200A21F7F /* PortfolioCoinItem */,
 				9341CC482073E10C00A21F7F /* CoinShortItem */,
 				9341CC582073F96000A21F7F /* ChoiceBottomPicker.swift */,
+				930CA3C1207D21E00052DAD0 /* PieChart */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -311,6 +355,7 @@
 				93219345207A8F2E00273DAF /* Int+Extensions.swift */,
 				93219347207A909B00273DAF /* UIColor+Extensions.swift */,
 				93219350207AC38300273DAF /* CGPoint+Extensions.swift */,
+				930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -347,7 +392,6 @@
 				93CC67C9203F0BD600F5BE75 /* Assets.xcassets */,
 				93CC67CB203F0BD600F5BE75 /* LaunchScreen.storyboard */,
 				93CC67CE203F0BD600F5BE75 /* Info.plist */,
-				93CC67C6203F0BD600F5BE75 /* crypto_graph.xcdatamodeld */,
 			);
 			path = "crypto-graph";
 			sourceTree = "<group>";
@@ -355,6 +399,7 @@
 		93CC682F204823D600F5BE75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				93CC67C6203F0BD600F5BE75 /* crypto_graph.xcdatamodeld */,
 				93CC681F204745FD00F5BE75 /* Managed.swift */,
 				9341CC3B2073B2C000A21F7F /* Coin */,
 				93CC6820204745FD00F5BE75 /* Price.swift */,
@@ -439,10 +484,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				93CC67CD203F0BD600F5BE75 /* LaunchScreen.storyboard in Resources */,
+				930CA3C8207D3FDD0052DAD0 /* TransactionItem.xib in Resources */,
 				93CC67CA203F0BD600F5BE75 /* Assets.xcassets in Resources */,
 				9341CC7E2077D57200A21F7F /* PortfolioCoinItem.xib in Resources */,
 				9341CC472073C95500A21F7F /* CoinShortItem.xib in Resources */,
 				93CC67C5203F0BD600F5BE75 /* Main.storyboard in Resources */,
+				930CA3C3207D257A0052DAD0 /* TransactionsChart.xib in Resources */,
 				9341CC95207A773800A21F7F /* PortfolioHeaderView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,6 +549,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				930CA3BC207D19C60052DAD0 /* PieChartView.swift in Sources */,
 				93C5E2A6206D6276007ED48E /* Convert.swift in Sources */,
 				9341CC7720767F4200A21F7F /* PortfolioDataController.swift in Sources */,
 				93CC6828204745FE00F5BE75 /* Transaction.swift in Sources */,
@@ -512,7 +560,9 @@
 				9341CC792076A3F500A21F7F /* PortfolioSession.swift in Sources */,
 				9341CC7020765FDF00A21F7F /* TransactionsListView.swift in Sources */,
 				9341CC7B2077D55B00A21F7F /* PortfolioCoinItem.swift in Sources */,
+				930CA3C0207D21AA0052DAD0 /* PiecePath.swift in Sources */,
 				9321934E207AC2BB00273DAF /* NavigationCustomOperation.swift in Sources */,
+				930CA3CA207D43040052DAD0 /* TransactionItem.swift in Sources */,
 				9341CC5F2075050300A21F7F /* AddTransactionNavigationController.swift in Sources */,
 				9321934A207AC26400273DAF /* CustomTransitionNavigationController.swift in Sources */,
 				9341CC452073C93D00A21F7F /* CoinShortItem.swift in Sources */,
@@ -536,6 +586,7 @@
 				93CC6826204745FE00F5BE75 /* CoreDataManager.swift in Sources */,
 				9341CC522073EB6200A21F7F /* EnterTransactionDetailsViewController.swift in Sources */,
 				93C5E2A2206D1B78007ED48E /* ImageManager.swift in Sources */,
+				930CA3C5207D269E0052DAD0 /* TransactionsChart.swift in Sources */,
 				93CC67C2203F0BD600F5BE75 /* ViewController.swift in Sources */,
 				935F9AFB206C0863008B0E66 /* ManagedContextInitializable.swift in Sources */,
 				9341CC852077FD6400A21F7F /* String+Extensions.swift in Sources */,
@@ -544,6 +595,7 @@
 				9341CC6920765F5D00A21F7F /* PortfolioView.swift in Sources */,
 				9341CC4E2073EB3900A21F7F /* EnterTransactionDetailsView.swift in Sources */,
 				93219346207A8F2E00273DAF /* Int+Extensions.swift in Sources */,
+				930CA3BE207D1D000052DAD0 /* CGFloat+Extensions.swift in Sources */,
 				9341CC572073F26400A21F7F /* AddTransactionPresenter.swift in Sources */,
 				93CC67C0203F0BD600F5BE75 /* AppDelegate.swift in Sources */,
 				9321934C207AC29300273DAF /* TransitionController.swift in Sources */,

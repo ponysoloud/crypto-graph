@@ -20,17 +20,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="saj-By-87a">
-                        <rect key="frame" x="10" y="14" width="401" height="48.5"/>
+                        <rect key="frame" x="10" y="14" width="401" height="54.5"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rYs-qy-WP8">
-                                <rect key="frame" x="11" y="8" width="34" height="34"/>
+                                <rect key="frame" x="11" y="8" width="38.5" height="38.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="1GN-h5-NFp"/>
                                     <constraint firstAttribute="width" secondItem="rYs-qy-WP8" secondAttribute="height" multiplier="1:1" id="zO7-sl-J3m"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ethereum" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rm3-Py-UMZ">
-                                <rect key="frame" x="55.5" y="17" width="70" height="18"/>
+                                <rect key="frame" x="60" y="13.5" width="70" height="27.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="2Wo-2L-zdr"/>
                                 </constraints>
@@ -38,14 +37,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="-10.3%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="na0-AC-dF8">
-                                <rect key="frame" x="288.5" y="17" width="96.5" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="-10.3%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="na0-AC-dF8">
+                                <rect key="frame" x="297" y="18.5" width="88" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$345↘" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-Tn-YeR">
-                                <rect key="frame" x="132.5" y="17.5" width="76" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$20550↘" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYo-Tn-YeR">
+                                <rect key="frame" x="137" y="19" width="76" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="76" id="992-g3-j2d"/>
                                 </constraints>
@@ -54,7 +53,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-10.3%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="alk-ya-IEb">
-                                <rect key="frame" x="215.5" y="17" width="66" height="18"/>
+                                <rect key="frame" x="239" y="18.5" width="51" height="18"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -66,14 +65,14 @@
                             <constraint firstItem="rYs-qy-WP8" firstAttribute="leading" secondItem="saj-By-87a" secondAttribute="leading" constant="11" id="3xM-CD-Q4g"/>
                             <constraint firstAttribute="trailing" secondItem="na0-AC-dF8" secondAttribute="trailing" constant="16" id="88P-a4-RRw"/>
                             <constraint firstItem="hYo-Tn-YeR" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="H52-YS-35M"/>
-                            <constraint firstItem="alk-ya-IEb" firstAttribute="leading" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="7" id="H6p-XW-Asm"/>
+                            <constraint firstItem="alk-ya-IEb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="7" id="H6p-XW-Asm"/>
                             <constraint firstItem="na0-AC-dF8" firstAttribute="leading" secondItem="alk-ya-IEb" secondAttribute="trailing" constant="7" id="RnQ-FV-HrA"/>
                             <constraint firstItem="na0-AC-dF8" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="XiT-ax-m9i"/>
-                            <constraint firstAttribute="bottom" secondItem="rYs-qy-WP8" secondAttribute="bottom" constant="9" id="YMZ-bq-aQC"/>
-                            <constraint firstItem="Rm3-Py-UMZ" firstAttribute="top" secondItem="saj-By-87a" secondAttribute="top" constant="17" id="bQa-ws-VEh"/>
+                            <constraint firstAttribute="bottom" secondItem="rYs-qy-WP8" secondAttribute="bottom" constant="8" id="YMZ-bq-aQC"/>
                             <constraint firstItem="alk-ya-IEb" firstAttribute="centerY" secondItem="Rm3-Py-UMZ" secondAttribute="centerY" id="fNu-cf-JMr"/>
                             <constraint firstItem="rYs-qy-WP8" firstAttribute="top" secondItem="saj-By-87a" secondAttribute="top" constant="8" id="maY-fS-q87"/>
-                            <constraint firstItem="alk-ya-IEb" firstAttribute="trailing" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="73" id="ns1-1O-uwY"/>
+                            <constraint firstItem="alk-ya-IEb" firstAttribute="trailing" secondItem="hYo-Tn-YeR" secondAttribute="trailing" constant="77" id="ns1-1O-uwY"/>
+                            <constraint firstItem="Rm3-Py-UMZ" firstAttribute="centerY" secondItem="rYs-qy-WP8" secondAttribute="centerY" id="oWh-L3-11J"/>
                             <constraint firstItem="Rm3-Py-UMZ" firstAttribute="leading" secondItem="rYs-qy-WP8" secondAttribute="trailing" constant="10" id="ojb-1H-sSm"/>
                             <constraint firstItem="hYo-Tn-YeR" firstAttribute="leading" secondItem="Rm3-Py-UMZ" secondAttribute="trailing" constant="7" id="uWP-Pm-Jm1"/>
                         </constraints>

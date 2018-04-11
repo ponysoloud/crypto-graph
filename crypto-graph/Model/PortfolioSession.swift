@@ -15,6 +15,8 @@ protocol PortfolioSessionDelegate: class {
 
     func portfolio(_ portfolio: PortfolioSession, didAdd coinTransactionsObject: CoinTransactionsData)
 
+    func portfolio(_ portfolio: PortfolioSession, didRemove coinTransactionsObject: CoinTransactionsData, from index: Int)
+
 }
 
 class PortfolioSession: NSObject {
@@ -93,6 +95,7 @@ class PortfolioSession: NSObject {
 extension PortfolioSession: NSFetchedResultsControllerDelegate {
 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+
         guard let object = anObject as? Transaction else {
             fatalError()
         }
@@ -100,6 +103,8 @@ extension PortfolioSession: NSFetchedResultsControllerDelegate {
         switch type {
         case .insert:
             portfolioController.addTransaction(object)
+        case .delete:
+            portfolioController.removeTransaction(object)
         default:
             return
         }
@@ -114,8 +119,12 @@ extension PortfolioSession: PortfolioDataControllerDelegate {
     }
 
     func controller(_ controller: PortfolioDataController, didAdd coinTransactionsObject: CoinTransactionsData) {
-        requestForCoinTransactionsDataPrice(coinTransactionsObject)
         delegate?.portfolio(self, didAdd: coinTransactionsObject)
+        requestForCoinTransactionsDataPrice(coinTransactionsObject)
+    }
+
+    func controller(_ controller: PortfolioDataController, didRemove coinTransactionsObject: CoinTransactionsData, from index: Int) {
+        delegate?.portfolio(self, didRemove: coinTransactionsObject, from: index)
     }
 }
 

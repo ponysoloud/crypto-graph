@@ -32,6 +32,7 @@ class AddTransactionNavigationController: UINavigationController, TabBarChildVie
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.isNavigationBarHidden = true
 
         presenter?.showRootScreen()
     }
@@ -50,7 +51,6 @@ extension AddTransactionNavigationController: AddTransactionNavigationController
     func leave() {
         self.dismiss(animated: true)
     }
-
 }
 
 extension AddTransactionNavigationController: AddTransactionView {

@@ -13,6 +13,8 @@ protocol PortfolioDataControllerDelegate: class {
     func controller(_ controller: PortfolioDataController, didChange coinTransactionsObject: CoinTransactionsData, at index: Int)
 
     func controller(_ controller: PortfolioDataController, didAdd coinTransactionsObject: CoinTransactionsData)
+
+    func controller(_ controller: PortfolioDataController, didRemove coinTransactionsObject: CoinTransactionsData, from index: Int)
 }
 
 class PortfolioDataController {
@@ -37,7 +39,23 @@ class PortfolioDataController {
     }
 
     func removeTransaction(_ transaction: Transaction) {
+        let _targetIndex = objects.index {
+            $0.coin == transaction.coin
+        }
 
+        guard let targetIndex = _targetIndex else {
+            return
+        }
+
+        let target = objects[targetIndex]
+        try! target.subtract(transaction: transaction)
+
+        if target.isEmpty {
+            delegate?.controller(self, didRemove: target, from: targetIndex)
+            objects.remove(at: targetIndex)
+        } else {
+            delegate?.controller(self, didChange: target, at: targetIndex)
+        }
     }
 
     private func addTransaction(_ transaction: Transaction, notifying: Bool) {
@@ -67,9 +85,47 @@ class CoinTransactionsData {
 
     let coin: Coin
 
-    private(set) var amount: Float
-    private(set) var avgBuyPrice: Float
-    private(set) var cost: Float
+    var amount: Float {
+        return history.reduce(0, {
+            switch $1.type {
+            case .buy:
+                return $0 + $1.quantity
+            case .sell:
+                return $0 - $1.quantity
+            }
+        })
+    }
+
+    var avgBuyPrice: Float {
+        var buyQuantity = history.filter({
+            $0.type == .buy
+        }).reduce(0, {
+            $0 + $1.quantity
+        })
+
+        let buyValue = history.filter({
+            $0.type == .buy
+        }).reduce(0, {
+            $0 + $1.value
+        })
+
+        if buyQuantity == 0 {
+            buyQuantity = 1
+        }
+
+        return buyValue/buyQuantity
+    }
+
+    var cost: Float {
+        return history.reduce(0, {
+            switch $1.type {
+            case .buy:
+                return $0 + $1.value
+            case .sell:
+                return $0 - $1.value
+            }
+        })
+    }
 
     var currentCost: Float? {
         guard let price = coin.price else {
@@ -84,37 +140,73 @@ class CoinTransactionsData {
             return nil
         }
 
-        return cost - curCost
+        return curCost - cost
     }
+
+    var isEmpty: Bool {
+        return amount == 0 && avgBuyPrice == 0 && cost == 0
+    }
+
+    struct History {
+        let id: String
+
+        let type: Transaction.TransactionType
+        let price: Float
+        let quantity: Float
+
+        var value: Float {
+            return price * quantity
+        }
+    }
+
+    private var history: [History] = []
 
     init(transaction: Transaction) {
         self.coin = transaction.coin
 
-        let digit = transaction.type == .buy ? 1 : -1
+        let id = transaction.objectID.uriRepresentation().absoluteString
 
-        self.amount = Float(digit) * transaction.quantity
-        self.avgBuyPrice = transaction.price.value
-        self.cost = amount * avgBuyPrice
+        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity))
     }
 
     func concat(with transaction: Transaction) throws {
         guard self.coin.symbol == transaction.coin.symbol else {
-            throw CoinTransactionsDataError.concatError
+            throw ConcatError.transactionCoinDoesntCorresponds
         }
 
-        switch transaction.type {
-        case .buy:
-            let am = self.amount + transaction.quantity
-            self.avgBuyPrice = self.cost / am + transaction.price.value * transaction.quantity / am
-            self.amount = am
-            self.cost = self.amount * self.avgBuyPrice
-        case .sell:
-            self.amount = self.amount - transaction.quantity
-            self.cost = self.amount * avgBuyPrice
+        let id = transaction.objectID.uriRepresentation().absoluteString
+
+        guard !history.contains(where: { $0.id == id }) else {
+            throw ConcatError.transactionAlreadyConcatenated
         }
+
+        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity))
+    }
+
+    func subtract(transaction: Transaction) throws {
+        guard self.coin.symbol == transaction.coin.symbol else {
+            throw SusbtractError.transactionCoinDoesntCorresponds
+        }
+
+        let id = transaction.objectID.uriRepresentation().absoluteString
+
+        guard let index = history.index(where: { $0.id == id }) else {
+            throw SusbtractError.transactionWasntConcatenatedBefore
+        }
+
+        history.remove(at: index)
+    }
+
+    enum ConcatError: Error {
+        case concatError
+        case transactionCoinDoesntCorresponds
+        case transactionAlreadyConcatenated
+    }
+
+    enum SusbtractError: Error {
+        case transactionCoinDoesntCorresponds
+        case transactionWasntConcatenatedBefore
     }
 }
 
-enum CoinTransactionsDataError: Error {
-    case concatError
-}
+

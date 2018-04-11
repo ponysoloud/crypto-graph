@@ -83,6 +83,14 @@ extension PortfolioPresenter: PortfolioSessionDelegate {
 
         print("ADD: - coin: \(coinTransactionsObject.coin.name) coinPrice: \(coinTransactionsObject.coin.price ?? 0)  amount: \(coinTransactionsObject.amount) price: \(coinTransactionsObject.avgBuyPrice) cost: \(coinTransactionsObject.cost)")
     }
+
+    func portfolio(_ portfolio: PortfolioSession, didRemove coinTransactionsObject: CoinTransactionsData, from index: Int) {
+        DispatchQueue.main.async {
+            self.view?.remove(at: index)
+        }
+
+        print("REMOVE: - coin: \(coinTransactionsObject.coin.name)")
+    }
 }
 
 struct CoinTransactionsViewData {

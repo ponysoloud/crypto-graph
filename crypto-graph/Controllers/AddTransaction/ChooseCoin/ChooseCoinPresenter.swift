@@ -33,6 +33,12 @@ class ChooseCoinPresenter: ChooseCoinViewPresenter {
             fatalError("Presenter's result array doesn't comform view array")
         }
 
+        coinsAPI.fetchCoinPrice(c, success: { coin in
+            print("Fetched coin")
+        }, failure: {
+            print($0)
+        })
+
         transactionCreatingSession.coin = c
     }
 

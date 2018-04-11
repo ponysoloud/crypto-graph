@@ -18,20 +18,27 @@ class EnterTransactionDetailsViewController: UIViewController {
     @IBOutlet fileprivate var transactionTypeTextField: UITextField!
     @IBOutlet fileprivate var quantityTextField: UITextField!
     @IBOutlet fileprivate var priceTextField: UITextField!
-    @IBOutlet fileprivate var currencyTextField: UITextField!
 
     @IBOutlet fileprivate var dateTextField: UITextField!
     @IBOutlet fileprivate var datePicker: UIDatePicker!
 
-    private var leaveButton: UIBarButtonItem!
+    @IBOutlet private var backButton: UIButton!
+    @IBOutlet private var leaveButton: UIButton!
+    @IBOutlet private var completeButton: UIButton!
+    @IBOutlet private var completeButtonTrailingConstraint: NSLayoutConstraint!
+
+    private let completeButtonTrailingDefaultConstant: CGFloat = -81.0
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        transactionTypeTextField.addTarget(self, action: #selector(showTransactionTypeChoices(_:)), for: .touchDown)
-        currencyTextField.addTarget(self, action: #selector(showCurrencyChoices(_:)), for: .touchDown)
-        datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
+        presenter?.setup()
 
+        transactionTypeTextField.addTarget(self, action: #selector(showTransactionTypeChoices(_:)), for: .touchDown)
+        datePicker.addTarget(self, action: #selector(datePickerChanged(_:)), for: .valueChanged)
+        priceTextField.addTarget(self, action: #selector(priceTextFieldEditingChanged(_:)), for: .editingChanged)
+
+        dateTextField.placeholder = DateFormatter.custom.string(from: Date())
         datePicker.datePickerMode = .date
 
         quantityTextField.keyboardType = .decimalPad
@@ -43,10 +50,10 @@ class EnterTransactionDetailsViewController: UIViewController {
         quantityTextField.tag = 1
         priceTextField.tag = 2
 
-        leaveButton = UIBarButtonItem(image: #imageLiteral(resourceName: "exit_icon"), style: .plain, target: self, action: #selector(tapLeaveSession(_:)))
-        leaveButton.tintColor = UIColor.black.withAlphaComponent(0.1)
-
-        navigationItem.rightBarButtonItem = leaveButton
+        backButton.addTarget(self, action: #selector(moveBack(_:)), for: .touchUpInside)
+        leaveButton.addTarget(self, action: #selector(leaveSession(_:)), for: .touchUpInside)
+        completeButton.addTarget(self, action: #selector(completeSession(_:)), for: .touchUpInside)
+        completeButton.isUserInteractionEnabled = false
     }
 
     @objc
@@ -73,23 +80,29 @@ class EnterTransactionDetailsViewController: UIViewController {
     }
 
     @objc
-    func showCurrencyChoices(_ sender: UITextField) {
-        let choices = [Price.CurrencyType.btc.string, Price.CurrencyType.rub.string, Price.CurrencyType.eur.string, Price.CurrencyType.usd.string]
-        let picker = ChoiceBottomPicker(title: "Currency", choices: choices, chooseAction: { choice in
-            sender.text = choice
+    func priceTextFieldEditingChanged(_ sender: UITextField) {
+        guard let text = sender.text else {
+            return
+        }
 
-            guard let value = Price.CurrencyType(string: choice) else {
-                fatalError()
-            }
-            self.presenter?.setTransaction(currency: value)
-        })
-
-        picker.present(in: self)
+        if let first = text.first, first != "$" {
+            sender.text!.insert("$", at: text.startIndex)
+        }
     }
 
     @objc
-    func tapLeaveSession(_ sender: Any) {
+    private func moveBack(_ sender: Any) {
+        presenter?.moveBack()
+    }
+
+    @objc
+    private func leaveSession(_ sender: Any) {
         transactionDelegate?.leave()
+    }
+
+    @objc
+    private func completeSession(_ sender: Any) {
+        transactionDelegate?.completeEnteringDetailsStep()
     }
 }
 
@@ -101,19 +114,35 @@ extension EnterTransactionDetailsViewController: UITextFieldDelegate {
             return false
         }
 
-        let new = (text as NSString).replacingCharacters(in: range, with: string)
+        var new = (text as NSString).replacingCharacters(in: range, with: string)
 
         switch textField.tag {
         case 1:
             guard let value = Float(new) else {
+                if new == "" {
+                    presenter?.setTransaction(quantity: nil)
+                    return true
+                }
+                
                 return false
             }
             presenter?.setTransaction(quantity: value)
             return true
         case 2:
+            if new.hasPrefix("$") {
+                let index = new.index(after: new.startIndex)
+                new = String(new.suffix(from: index))
+            }
+
             guard let value = Float(new) else {
+                if new == "" {
+                    presenter?.setTransaction(price: nil)
+                    return true
+                }
+
                 return false
             }
+            
             presenter?.setTransaction(price: value)
             return true
         default:
@@ -124,43 +153,43 @@ extension EnterTransactionDetailsViewController: UITextFieldDelegate {
 
 extension EnterTransactionDetailsViewController: EnterTransactionDetailsView {
 
+    func moveBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
+    func setPricePlaceholder(_ placeholder: String) {
+        priceTextField.placeholder = placeholder
+    }
+
     func showContinuationButton(isVisible: Bool) {
         if isVisible {
-            if let _ = view.viewWithTag(11) {
+            guard !completeButton.isUserInteractionEnabled else {
                 return
             }
 
-            let button = LargeButton(frame: CGRect.zero)
-            button.setTitle("Add transaction")
+            completeButton.isHidden = false
+            completeButton.isUserInteractionEnabled = false
 
-            button.translatesAutoresizingMaskIntoConstraints = false
-
-            self.view.addSubview(button)
-            button.tag = 11
-            button.heightAnchor.constraint(equalToConstant: 70.0).isActive = true
-            button.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30.0).isActive = true
-            button.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30.0).isActive = true
-            button.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50.0).isActive = true
-
-            button.addTarget(self, action: #selector(continuationButtonTap(_:)), for: .touchUpInside)
-
-            button.animateAppearing()
+            completeButtonTrailingConstraint.constant = completeButtonTrailingDefaultConstant
+            UIView.animate(withDuration: 0.3, animations: {
+                self.completeButtonTrailingConstraint.constant = 14
+                self.view.layoutIfNeeded()
+            }, completion: { _ in
+                self.completeButton.isUserInteractionEnabled = true
+            })
         } else {
-            guard let button = view.viewWithTag(11) as? LargeButton else {
+            guard completeButton.isUserInteractionEnabled else {
                 return
             }
 
-            button.animateDisapperating() {
-                button.removeFromSuperview()
-            }
+            completeButton.isUserInteractionEnabled = false
+            completeButtonTrailingConstraint.constant = 14
+            UIView.animate(withDuration: 0.3, animations: {
+                self.completeButtonTrailingConstraint.constant = self.completeButtonTrailingDefaultConstant
+                self.view.layoutIfNeeded()
+            })
         }
     }
-
-    @objc
-    func continuationButtonTap(_ sender: Any) {
-        transactionDelegate?.completeEnteringDetailsStep()
-    }
-
 }
 
 extension Transaction.TransactionType {

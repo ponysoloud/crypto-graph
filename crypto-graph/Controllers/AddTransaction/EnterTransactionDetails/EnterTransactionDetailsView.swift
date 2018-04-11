@@ -12,4 +12,8 @@ protocol EnterTransactionDetailsView: class {
 
     func showContinuationButton(isVisible: Bool)
 
+    func setPricePlaceholder(_ placeholder: String)
+
+    func moveBack()
+
 }

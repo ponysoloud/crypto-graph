@@ -8,18 +8,18 @@
         <attribute name="name" attributeType="String" syncable="YES"/>
         <attribute name="rank" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="symbol" attributeType="String" syncable="YES"/>
-        <relationship name="transactions" toMany="YES" deletionRule="Deny" destinationEntity="Transaction" inverseName="coin" inverseEntity="Transaction" syncable="YES"/>
+        <relationship name="transactions" toMany="YES" deletionRule="Cascade" destinationEntity="Transaction" inverseName="coin" inverseEntity="Transaction" syncable="YES"/>
     </entity>
     <entity name="Price" representedClassName="Price" syncable="YES">
         <attribute name="currencyTypeValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="value" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="transaction" maxCount="1" deletionRule="Deny" destinationEntity="Transaction" inverseName="price" inverseEntity="Transaction" syncable="YES"/>
+        <relationship name="transaction" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="price" inverseEntity="Transaction" syncable="YES"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="quantity" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="typeValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="coin" maxCount="1" deletionRule="Cascade" destinationEntity="Coin" inverseName="transactions" inverseEntity="Coin" syncable="YES"/>
+        <relationship name="coin" maxCount="1" deletionRule="No Action" destinationEntity="Coin" inverseName="transactions" inverseEntity="Coin" syncable="YES"/>
         <relationship name="price" maxCount="1" deletionRule="Cascade" destinationEntity="Price" inverseName="transaction" inverseEntity="Price" syncable="YES"/>
     </entity>
     <elements>

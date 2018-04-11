@@ -17,5 +17,8 @@ protocol PortfolioView: class {
     func updateObject(existingAt index: Int, with object: CoinTransactionsViewData)
 
     func updateHeader(with object: TotalTransactionsViewData)
-    
+
+    func remove(at index: Int)
+
+    func show(placeholder message: String)
 }

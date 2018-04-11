@@ -25,6 +25,8 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 
     private var headerView: PortfolioHeaderView!
 
+    private var newTasksOrder: [() -> Void] = []
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -34,6 +36,14 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 
         return refreshControl
     }()
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        newTasksOrder.forEach { $0() }
+        
+        newTasksOrder = []
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,6 +97,10 @@ extension PortfolioViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return portfolioData.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return PortfolioCoinItem.height
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -146,16 +160,48 @@ extension PortfolioViewController: PortfolioView {
     }
 
     func append(_ newObject: CoinTransactionsViewData) {
-        portfolioData.append(newObject)
+        let task = {
+            print("Append to view \(newObject.coinName)")
+            self.portfolioData.append(newObject)
 
-        let indexPath = IndexPath(row: portfolioData.count - 1, section: 0)
-        portfolioTableView.insertRows(at: [indexPath], with: .bottom)
+            let indexPath = IndexPath(row: self.portfolioData.count - 1, section: 0)
+            self.portfolioTableView.insertRows(at: [indexPath], with: .bottom)
+        }
+
+        if (self.isViewLoaded && (self.view.window != nil)) {
+            task()
+        } else {
+            newTasksOrder.append(task)
+        }
     }
 
     func updateObject(existingAt index: Int, with object: CoinTransactionsViewData) {
-        portfolioData[index] = object
-        let indexPath = IndexPath(row: index, section: 0)
-        portfolioTableView.reloadRows(at: [indexPath], with: .none)
+        let task = {
+            print("Update \(object.coinName)")
+            self.portfolioData[index] = object
+            let indexPath = IndexPath(row: index, section: 0)
+            self.portfolioTableView.reloadRows(at: [indexPath], with: .none)
+        }
+
+        if (self.isViewLoaded && (self.view.window != nil)) {
+            task()
+        } else {
+            newTasksOrder.append(task)
+        }
     }
 
+    func remove(at index: Int) {
+        let task = {
+            print("Remove at \(index)")
+            self.portfolioData.remove(at: index)
+            let indexPath = IndexPath(row: index, section: 0)
+            self.portfolioTableView.deleteRows(at: [indexPath], with: .fade)
+        }
+
+        if (self.isViewLoaded && (self.view.window != nil)) {
+            task()
+        } else {
+            newTasksOrder.append(task)
+        }
+    }
 }

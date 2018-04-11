@@ -9,15 +9,86 @@
 import Foundation
 import CoreData
 
+protocol TransactionCreatingSessionDelegate: class {
+
+    func creatingSession(_ creatingSession: TransactionCreatingSession, isComplete: Bool)
+}
+
 class TransactionCreatingSession {
 
-    var coin: Coin?
-    var type: Transaction.TransactionType?
-    var quantity: Float?
-    var date: Date?
-    var price: Float?
-    var currency: Price.CurrencyType?
+    weak var delegate: TransactionCreatingSessionDelegate?
 
+    var coin: Coin? {
+        get {
+            return propertiesDict[.CoinKey] as? Coin
+        }
+        set {
+            if let new = newValue {
+                propertiesDict[.CoinKey] = new
+            } else {
+                propertiesDict.removeValue(forKey: .CoinKey)
+            }
+        }
+    }
+    var type: Transaction.TransactionType? {
+        get {
+            return propertiesDict[.TypeKey] as? Transaction.TransactionType
+        }
+        set {
+            if let new = newValue {
+                propertiesDict[.TypeKey] = new
+            } else {
+                propertiesDict.removeValue(forKey: .TypeKey)
+            }
+        }
+    }
+    var quantity: Float? {
+        get {
+            return propertiesDict[.QuantityKey] as? Float
+        }
+        set {
+            if let new = newValue {
+                propertiesDict[.QuantityKey] = new
+            } else {
+                propertiesDict.removeValue(forKey: .QuantityKey)
+            }
+        }
+    }
+    var date: Date? {
+        get {
+            return propertiesDict[.DateKey] as? Date
+        }
+        set {
+             if let new = newValue {
+                propertiesDict[.DateKey] = new
+             } else {
+                propertiesDict.removeValue(forKey: .DateKey)
+            }
+        }
+    }
+    var price: Float? {
+        get {
+            return propertiesDict[.PriceKey] as? Float
+        }
+        set {
+            if let new = newValue {
+                propertiesDict[.PriceKey] = new
+            } else {
+                propertiesDict.removeValue(forKey: .PriceKey)
+            }
+        }
+    }
+    var currency: Price.CurrencyType = .usd
+
+    enum PropertiesKey: Int {
+        case CoinKey = 0, TypeKey, QuantityKey, DateKey, PriceKey
+    }
+
+    private var propertiesDict: [PropertiesKey: Any] = [:] {
+        didSet {
+            delegate?.creatingSession(self, isComplete: isComplete)
+        }
+    }
     private let context: NSManagedObjectContext
 
     init(context: NSManagedObjectContext) {
@@ -25,15 +96,17 @@ class TransactionCreatingSession {
     }
 
     var isComplete: Bool {
-        let mirror = Mirror(reflecting: self)
-
-        return !mirror.children.contains(where: {
-            if case Optional<Any>.some(_) = $0.value {
+        for i in 0...4 {
+            guard let key = PropertiesKey(rawValue: i), let value = propertiesDict[key] else {
+                print("Error for: \(PropertiesKey(rawValue: i)!)")
                 return false
-            } else {
-                return true
             }
-        })
+
+            print(key)
+            print(value)
+        }
+
+        return true
     }
 
     func getTransaction(completion: @escaping (Transaction?) -> Void) {
@@ -42,8 +115,15 @@ class TransactionCreatingSession {
         }
 
         context.performChanges {
-            let transaction = Transaction.insert(into: self.context, coin: self.coin!, type: self.type!, quantity: self.quantity!, date: self.date!, price: self.price!, currencyType: self.currency!)
+            let transaction = Transaction.insert(into: self.context, coin: self.coin!, type: self.type!, quantity: self.quantity!, date: self.date!, price: self.price!, currencyType: self.currency)
             completion(transaction)
         }
+    }
+
+    func clearDetails() {
+        type = nil
+        quantity = nil
+        date = nil
+        price = nil
     }
 }

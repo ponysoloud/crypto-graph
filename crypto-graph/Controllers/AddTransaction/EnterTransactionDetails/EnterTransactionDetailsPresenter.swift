@@ -18,40 +18,47 @@ class EnterTransactionDetailsPresenter: EnterTransactionDetailsViewPresenter {
     required init(view: EnterTransactionDetailsView, transactionCreatingSession: TransactionCreatingSession) {
         self.view = view
         self.transactionCreatingSession = transactionCreatingSession
+
+        transactionCreatingSession.delegate = self
+    }
+
+    func setup() {
+        guard let coin = transactionCreatingSession.coin, let price = coin.price else {
+            return
+        }
+
+        view?.setPricePlaceholder(String(price: price))
     }
 
     func setTransaction(type: Transaction.TransactionType) {
         transactionCreatingSession.type = type
-        checkCompletion()
     }
 
-    func setTransaction(quantity: Float) {
+    func setTransaction(quantity: Float?) {
         transactionCreatingSession.quantity = quantity
-        checkCompletion()
     }
 
     func setTransaction(date: Date) {
         transactionCreatingSession.date = date
-        checkCompletion()
     }
 
-    func setTransaction(price: Float) {
+    func setTransaction(price: Float?) {
         transactionCreatingSession.price = price
-        checkCompletion()
     }
 
     func setTransaction(currency: Price.CurrencyType) {
         transactionCreatingSession.currency = currency
-        checkCompletion()
     }
 
-    // MARK: - Private presenter's properties and functions.
+    func moveBack() {
+        transactionCreatingSession.clearDetails()
+        view?.moveBack()
+    }
+}
 
-    private func checkCompletion() {
-        if transactionCreatingSession.isComplete {
-            view?.showContinuationButton(isVisible: true)
-        } else {
-            view?.showContinuationButton(isVisible: false)
-        }
+extension EnterTransactionDetailsPresenter: TransactionCreatingSessionDelegate {
+
+    func creatingSession(_ creatingSession: TransactionCreatingSession, isComplete: Bool) {
+        view?.showContinuationButton(isVisible: isComplete)
     }
 }

@@ -14,14 +14,14 @@ class PortfolioNavigationController: CustomTransitioningNavigationController, Ta
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        self.navigationBar.shadowImage = UIImage()
+        //self.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        //self.navigationBar.shadowImage = UIImage()
         self.navigationBar.backgroundColor = .clear
         self.navigationBar.isTranslucent = true
 
         self.isNavigationBarHidden = true
 
-
+        self.view.clipsToBounds = false
     }
 
 }

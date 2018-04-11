@@ -18,6 +18,7 @@ class PortfolioCoinScreen: UIViewController {
     @IBOutlet private var iconImageView: UIImageView!
     @IBOutlet private var coinNameLabel: UILabel!
     @IBOutlet private var currentPriceLabel: UILabel!
+    @IBOutlet private var averagePriceLabel: UILabel!
     @IBOutlet private var changeLabel: UILabel!
     @IBOutlet private var amountLabel: UILabel!
     @IBOutlet private var costLabel: UILabel!
@@ -33,16 +34,25 @@ class PortfolioCoinScreen: UIViewController {
             return
         }
 
-        backButton.addTarget(self, action: #selector(moveBack(_:)), for: .touchUpInside)
-
         iconImageView.image = portfolioItem.coinImage
         coinNameLabel.text = portfolioItem.coinName
-        currentPriceLabel.text = String(float: portfolioItem.currentPrice, formatting: true, prefixing: "$", appending: "")
-        changeLabel.text = String(float: portfolioItem.change1h, appending: "%")
+
+        var textColor: UIColor = UIColor(hex: 0x626262)
+        var priceSuffix: String = ""
+
+        if let change = portfolioItem.change1h, let profit = portfolioItem.profit {
+            priceSuffix = change > 0 ? "↗" : "↘"
+            textColor = profit > 0 ? UIColor(hex: 0x62d07d) : UIColor(hex: 0xf35467)
+        }
+
+        currentPriceLabel.text = String(price: portfolioItem.currentPrice, appending: priceSuffix)
+        averagePriceLabel.text = String(price: portfolioItem.avgBuyPrice)
+        changeLabel.text = String(percents: portfolioItem.change1h)
         amountLabel.text = String(portfolioItem.amount)
-        costLabel.text = String(portfolioItem.cost)
-        currentValueLabel.text = String(float: portfolioItem.currentCost, prefixing: "$")
-        profitLabel.text = String(float: portfolioItem.profit, appending: "%")
+        costLabel.text = String(price: portfolioItem.cost)
+        currentValueLabel.text = String(price: portfolioItem.currentCost)
+        profitLabel.text = String(percents: portfolioItem.profit)
+        profitLabel.textColor = textColor
 
         contentView.layer.cornerRadius = 6.0
 
@@ -50,6 +60,8 @@ class PortfolioCoinScreen: UIViewController {
         contentView.layer.shadowOffset = CGSize(width: 0, height: 3)
         contentView.layer.shadowRadius = 5
         contentView.layer.shadowOpacity = 0.05
+
+        backButton.addTarget(self, action: #selector(moveBack(_:)), for: .touchUpInside)
     }
 
     @objc

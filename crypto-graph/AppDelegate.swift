@@ -23,26 +23,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        let portfolio = ControllerHelper.instantiateViewController(identifier: "PortfolioNavigationController")
-        portfolio.tabBarItem = UITabBarItem(title: "Portfolio", image: #imageLiteral(resourceName: "circle_tabbar"), tag: 0)
-        guard let viewController1 = portfolio as? PortfolioNavigationController else {
+        let _portfolioVC = ControllerHelper.instantiateViewController(identifier: "PortfolioNavigationController")
+        guard let portfolioVC = _portfolioVC as? PortfolioNavigationController else {
             fatalError()
         }
-        viewController1.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
+        portfolioVC.tabBarItem = UITabBarItem(title: "Portfolio", image: #imageLiteral(resourceName: "list_tabbar"), tag: 0)
+        portfolioVC.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
-        let vc2 = ControllerHelper.instantiateViewController(identifier: "AddTransactionNavigationController")
-        vc2.tabBarItem = UITabBarItem(title: "Add transaction", image: #imageLiteral(resourceName: "rect_tabbar"), tag: 1)
-        let viewController2 = vc2 as! TabBarChildViewController
+        let _addTransactionVC = ControllerHelper.instantiateViewController(identifier: "AddTransactionNavigationController")
+        guard let addTransactionVC = _addTransactionVC as? AddTransactionNavigationController else {
+            fatalError()
+        }
+        addTransactionVC.tabBarItem = UITabBarItem(title: "Add transaction", image: #imageLiteral(resourceName: "plus_tabbar"), tag: 1)
 
 
-        let vc3 = ControllerHelper.instantiateViewController(identifier: "ViewController")
-        vc3.tabBarItem = UITabBarItem(title: "VC3", image:#imageLiteral(resourceName: "circle_tabbar"), tag: 2)
-        let viewController3 = vc3 as! TabBarChildViewController
+        let _transactionsVC = ControllerHelper.instantiateViewController(identifier: "TransactionsListViewController")
+        guard let transactionsVC = _transactionsVC as? TransactionsListViewController else {
+            fatalError()
+        }
+
+        transactionsVC.tabBarItem = UITabBarItem(title: "Transactions", image: #imageLiteral(resourceName: "pie_tabbar"), tag: 2)
 
         let tabBarController = CustomTabBarController()
             tabBarController.itemsPresentationsStyle = .onlyImage
 
-        tabBarController.setViewControllers([viewController1, viewController2, viewController3])
+        tabBarController.setViewControllers([portfolioVC, addTransactionVC, transactionsVC])
 
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()

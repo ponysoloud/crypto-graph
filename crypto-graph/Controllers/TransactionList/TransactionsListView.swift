@@ -7,5 +7,15 @@
 //
 
 protocol TransactionsListView: class {
+
+    func provide(data: [TransactionViewData])
+
+    func provide(chart data: [CoinChartData])
+
+    func insert(data: TransactionViewData, at index: Int)
+
+    func remove(at index: Int)
+
+    func show(placeholder message: String)
     
 }

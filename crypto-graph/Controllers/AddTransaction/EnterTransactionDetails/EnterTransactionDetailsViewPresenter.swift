@@ -14,12 +14,16 @@ protocol EnterTransactionDetailsViewPresenter: class {
 
     func setTransaction(type: Transaction.TransactionType)
 
-    func setTransaction(quantity: Float)
+    func setTransaction(quantity: Float?)
 
     func setTransaction(date: Date)
 
-    func setTransaction(price: Float)
+    func setTransaction(price: Float?)
 
     func setTransaction(currency: Price.CurrencyType)
+
+    func moveBack()
+
+    func setup()
 
 }

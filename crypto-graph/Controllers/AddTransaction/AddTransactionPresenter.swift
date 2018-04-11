@@ -36,7 +36,6 @@ class AddTransactionPresenter {
         let session = transactionCreatingSession
 
         guard
-            let _ = session.currency,
             let _ = session.price,
             let _ = session.quantity,
             let _ = session.date,
@@ -49,8 +48,11 @@ class AddTransactionPresenter {
             guard let _ = transaction else {
                 fatalError()
             }
+
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.view?.complete()
+            }
         }
-        view?.complete()
     }
 
 }

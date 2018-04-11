@@ -20,7 +20,7 @@ class ChooseCoinViewController: UIViewController {
     @IBOutlet fileprivate var coinTextField: UITextField!
     @IBOutlet fileprivate var searchCoinTableView: UITableView!
 
-    private var leaveButton: UIBarButtonItem!
+    @IBOutlet private var leaveButton: UIButton!
 
     override func viewDidLoad() {
         coinTextField.delegate = self
@@ -31,14 +31,11 @@ class ChooseCoinViewController: UIViewController {
         let nib = UINib(nibName: CoinShortItem.nibName, bundle: nil)
         searchCoinTableView.register(nib, forCellReuseIdentifier: CoinShortItem.reuseIdentifier)
 
-        leaveButton = UIBarButtonItem(image: #imageLiteral(resourceName: "exit_icon"), style: .plain, target: self, action: #selector(tapLeaveSession(_:)))
-        leaveButton.tintColor = UIColor.black.withAlphaComponent(0.1)
-
-        navigationItem.rightBarButtonItem = leaveButton
+        leaveButton.addTarget(self, action: #selector(leaveSession(_:)), for: .touchUpInside)
     }
 
     @objc
-    func tapLeaveSession(_ sender: Any) {
+    func leaveSession(_ sender: Any) {
         transactionDelegate?.leave()
     }
 }
@@ -79,10 +76,38 @@ extension ChooseCoinViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.chooseSearchingResult(searchResults[indexPath.row])
-        transactionDelegate?.completeChoosingCoinStep()
-    }
+        let viewData = searchResults[indexPath.row]
 
+        guard let cell = tableView.cellForRow(at: indexPath) as? CoinShortItem else {
+            fatalError()
+        }
+
+        cell.animateSelection {
+            self.presenter?.chooseSearchingResult(viewData)
+            self.coinTextField.text = viewData.name
+            self.coinTextField.textColor = UIColor.black
+
+            guard let indexPaths = tableView.indexPathsForVisibleRows else {
+                return
+            }
+
+            let length = indexPaths.count
+            var counter: Double = 0
+            indexPaths.reversed().enumerated().forEach { i in
+                DispatchQueue.main.asyncAfter(deadline: .now() + counter) {
+                    self.searchResults.remove(at: i.element.row)
+                    tableView.deleteRows(at: [i.element], with: .right)
+
+                    if i.offset == length - 1 {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                            self.transactionDelegate?.completeChoosingCoinStep()
+                        }
+                    }
+                }
+                counter += 0.08
+            }
+        }
+    }
 }
 
 extension ChooseCoinViewController: ChooseCoinView {

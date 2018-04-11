@@ -29,7 +29,7 @@ enum NavigationCustomOperation {
 
 class NavigationCustomAnimator: NSObject, UIViewControllerAnimatedTransitioning {
     var operation: NavigationCustomOperation = .idle
-    var duration = 0.6
+    var duration = 0.8
 
     let damping: CGFloat = 0.7
     let initialSpringVelocity: CGFloat = 0.1
@@ -42,10 +42,12 @@ class NavigationCustomAnimator: NSObject, UIViewControllerAnimatedTransitioning 
         }
 
         let containerView = transitionContext.containerView
-        containerView.backgroundColor = UIColor.white
+
 
         let toViewController = transitionContext.viewController(forKey: .to)!
         let fromViewController = transitionContext.viewController(forKey: .from)!
+
+        containerView.backgroundColor = toViewController.view.backgroundColor
 
         let moveRight = (operation != .show)
 

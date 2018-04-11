@@ -28,9 +28,16 @@ class PortfolioHeaderView: UIView {
     }
 
     func setup(with data: TotalTransactionsViewData) {
-        totalValueLabel.text = String(int: Int(float: data.currentCost), prefixing: "$")
-        totalCostLabel.text = String(int: Int(float: data.cost), prefixing: "$")
-        totalProfitLabel.text = String(float: data.profit, appending: "%")
+        var textColor: UIColor = UIColor(hex: 0x626262)
+
+        if let profit = data.profit {
+            textColor = profit > 0 ? UIColor(hex: 0x62d07d) : UIColor(hex: 0xf35467)
+        }
+
+        totalValueLabel.text = String(price: data.currentCost, rounding: true)
+        totalCostLabel.text = String(price: data.cost, rounding: true)
+        totalProfitLabel.text = String(percents: data.profit, formatting: true)
+        totalProfitLabel.textColor = textColor
     }
 
     private func setupStyle() {
