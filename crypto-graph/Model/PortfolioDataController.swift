@@ -81,7 +81,6 @@ class PortfolioDataController {
             delegate?.controller(self, didChange: target, at: targetIndex)
         }
     }
-
 }
 
 class CoinTransactionsData {
@@ -143,7 +142,11 @@ class CoinTransactionsData {
             return nil
         }
 
-        return curCost - cost
+        if cost == 0 {
+            return 0
+        }
+
+        return ((curCost - cost) * 100.0)/cost
     }
 
     var isEmpty: Bool {

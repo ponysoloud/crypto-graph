@@ -28,6 +28,8 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 
     private var headerView: PortfolioHeaderView!
 
+    private var swipeGestureBlocking: Bool!
+
     lazy var refreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action:
@@ -55,6 +57,23 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
         portfolioTableView.delegate = self
         portfolioTableView.dataSource = self
         portfolioTableView.addSubview(self.refreshControl)
+
+
+
+        /*
+        swipeGestureBlocking = false
+
+        var swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(swipeUpHandler(_:)))
+        swipeUp.direction = UISwipeGestureRecognizerDirection.up
+        self.portfolioTableView.addGestureRecognizer(swipeUp)
+
+        var swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(swipeDownHandler(_:)))
+        swipeDown.direction = UISwipeGestureRecognizerDirection.down
+        self.portfolioTableView.addGestureRecognizer(swipeDown)
+ */
+
+        portfolioTableView.rowHeight = UITableViewAutomaticDimension
+        portfolioTableView.estimatedRowHeight = PortfolioCoinItem.height
 
         let nib = UINib(nibName: PortfolioCoinItem.nibName, bundle: nil)
         portfolioTableView.register(nib, forCellReuseIdentifier: PortfolioCoinItem.reuseIdentifier)
@@ -87,7 +106,7 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
             nameWidthConstraint.constant = 50.0
         case .medium:
             nameWidthConstraint.constant = 68.0
-            priceRangeConstraint.constant = 56.0
+            priceRangeConstraint.constant = 58.0
         case .plus, .extra:
             nameWidthConstraint.constant = 70.0
             priceRangeConstraint.constant = 73.0
@@ -102,6 +121,23 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             refreshControl.endRefreshing()
+        }
+    }
+
+    private func respondToSwipeGesture(gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.right:
+                print("Swiped right")
+            case UISwipeGestureRecognizerDirection.down:
+                print("Swiped down")
+            case UISwipeGestureRecognizerDirection.left:
+                print("Swiped left")
+            case UISwipeGestureRecognizerDirection.up:
+                print("Swiped up")
+            default:
+                break
+            }
         }
     }
 }
@@ -153,13 +189,48 @@ extension PortfolioViewController: UITableViewDelegate, UITableViewDataSource {
 
         let direction: UITableViewScrollPosition = max < indexPath ? .bottom : .top
 
-        tableView.isScrollEnabled = false
+        tableView.isUserInteractionEnabled = false
         tableView.scrollToRow(at: indexPath, at: direction, animated: true)
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
-            tableView.isScrollEnabled = true
+            tableView.isUserInteractionEnabled = true
         }
     }
+
+    /*
+    @objc
+    func swipeUpHandler(_ sender: Any) {
+        guard !swipeGestureBlocking, let indexes = portfolioTableView.indexPathsForVisibleRows, let max = indexes.max() else {
+            return
+        }
+
+        let count = portfolioTableView.numberOfRows(inSection: 0)
+
+        if max.row < count - 1 {
+            swipeGestureBlocking = true
+            portfolioTableView.scrollToRow(at: IndexPath(row: max.row + 1, section: 0), at: .bottom, animated: true)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            self.swipeGestureBlocking = false
+        }
+    }
+
+    @objc
+    func swipeDownHandler(_ sender: Any) {
+        guard !swipeGestureBlocking, let indexes = portfolioTableView.indexPathsForVisibleRows, let min = indexes.min() else {
+            return
+        }
+
+        if min.row > 0 {
+            swipeGestureBlocking = true
+            portfolioTableView.scrollToRow(at: IndexPath(row: min.row - 1, section: 0), at: .top, animated: true)
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+            self.swipeGestureBlocking = false
+        }
+    } */
 }
 
 extension PortfolioViewController: PortfolioView {

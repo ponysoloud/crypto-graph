@@ -13,7 +13,6 @@ protocol Managed: class, NSFetchRequestResult {
     static var defaultSortDescriptors: [NSSortDescriptor] { get }
 }
 
-
 extension Managed {
     static var defaultSortDescriptors: [NSSortDescriptor] { return [] }
 
@@ -29,7 +28,6 @@ extension Managed {
         return request
     }
 }
-
 
 extension Managed where Self: NSManagedObject {
 

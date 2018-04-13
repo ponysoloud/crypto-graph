@@ -138,7 +138,7 @@ struct TotalTransactionsData {
             return nil
         }
 
-        return current - totalCost
+        return ((current - totalCost)*100.0)/totalCost
     }
 
 }

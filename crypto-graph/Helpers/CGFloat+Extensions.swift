@@ -9,8 +9,13 @@
 import UIKit
 
 extension CGFloat {
-    func radians() -> CGFloat {
-        let b = .pi * (self/180)
-        return b
+
+    /// Formats the CGFloat to a maximum of 1 decimal place.
+    var formattedToOneDecimalPlace : String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 1
+        return formatter.string(from: NSNumber(value: self.native)) ?? "\(self)"
     }
 }

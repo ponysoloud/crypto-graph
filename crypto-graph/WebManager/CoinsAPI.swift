@@ -12,7 +12,9 @@ import CoreData
 final class CoinsAPI: APIEndpoint {
 
     override var baseURL: String {
-        return "http://127.0.0.1:5000"
+        //return "http://127.0.0.1:5000"
+
+        return "https://crypto-graph-api.herokuapp.com"
     }
 
     override var mapper: Mapper? {

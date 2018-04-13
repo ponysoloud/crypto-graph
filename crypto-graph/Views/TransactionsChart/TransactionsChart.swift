@@ -25,6 +25,8 @@ class TransactionsChart: UITableViewCell {
     }
 
     func setup(with chartPieces: [Piece]) {
+        pieChartView.showSegmentLabels = true
+        pieChartView.showSegmentValueInLabel = true
         pieChartView.pieces = chartPieces
     }
 

@@ -85,7 +85,7 @@ class PortfolioCoinItem: UITableViewCell {
             priceWidthConstraint.constant = 50.0
         case .medium:
             nameWidthConstraint.constant = 62.0
-            priceWidthConstraint.constant = 65.0
+            priceWidthConstraint.constant = 67.0
         case .plus, .extra:
             nameWidthConstraint.constant = 70.0
             priceWidthConstraint.constant = 76.0
