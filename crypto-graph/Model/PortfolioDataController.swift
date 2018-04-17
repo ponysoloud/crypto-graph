@@ -87,6 +87,20 @@ class CoinTransactionsData {
 
     let coin: Coin
 
+    var markets: String {
+        var markets: [String] = []
+
+        history.forEach { hist in
+            if !markets.contains(where: { market in
+                market.lowercased() == hist.market.lowercased()
+            }) {
+                markets.append(hist.market)
+            }
+        }
+
+        return markets.joined(separator: ", ")
+    }
+
     var amount: Float {
         return history.reduce(0, {
             switch $1.type {
@@ -160,6 +174,8 @@ class CoinTransactionsData {
         let price: Float
         let quantity: Float
 
+        let market: String
+
         var value: Float {
             return price * quantity
         }
@@ -172,7 +188,7 @@ class CoinTransactionsData {
 
         let id = transaction.objectID.uriRepresentation().absoluteString
 
-        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity))
+        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity, market: transaction.market))
     }
 
     func concat(with transaction: Transaction) throws {
@@ -186,7 +202,7 @@ class CoinTransactionsData {
             throw ConcatError.transactionAlreadyConcatenated
         }
 
-        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity))
+        history.append(History(id: id, type: transaction.type, price: transaction.price.value, quantity: transaction.quantity, market: transaction.market))
     }
 
     func subtract(transaction: Transaction) throws {

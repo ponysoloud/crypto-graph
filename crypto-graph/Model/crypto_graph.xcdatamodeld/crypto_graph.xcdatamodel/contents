@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13772" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Coin" representedClassName="Coin" syncable="YES">
         <attribute name="fullname" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="Integer 64" usesScalarValueType="YES" syncable="YES"/>
@@ -17,6 +17,7 @@
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="market" attributeType="String" syncable="YES"/>
         <attribute name="quantity" attributeType="Float" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="typeValue" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="coin" maxCount="1" deletionRule="No Action" destinationEntity="Coin" inverseName="transactions" inverseEntity="Coin" syncable="YES"/>
@@ -25,6 +26,6 @@
     <elements>
         <element name="Coin" positionX="-468" positionY="-171" width="128" height="165"/>
         <element name="Price" positionX="-189" positionY="-180" width="126" height="90"/>
-        <element name="Transaction" positionX="-693" positionY="-216" width="128" height="120"/>
+        <element name="Transaction" positionX="-693" positionY="-216" width="128" height="133"/>
     </elements>
 </model>

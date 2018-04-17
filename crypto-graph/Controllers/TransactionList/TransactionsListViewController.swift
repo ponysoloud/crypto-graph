@@ -71,6 +71,21 @@ class TransactionsListViewController: UITableViewController, TabBarChildViewCont
         }
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TransactionItem else {
+            return
+        }
+
+        cell.animateSelection {
+            let _transactionScreen = ControllerHelper.instantiateViewController(identifier: "TransactionScreen")
+            guard let transactionScreen = _transactionScreen as? TransactionScreen else {
+                fatalError()
+            }
+
+            transactionScreen.transactionItem = self.transactionsData[indexPath.row - 1]
+            self.navigationController?.pushViewController(transactionScreen, animated: true)
+        }
+    }
 }
 
 extension TransactionsListViewController: TransactionItemDelegate {

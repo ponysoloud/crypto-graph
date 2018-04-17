@@ -86,5 +86,4 @@ extension AddTransactionNavigationController: AddTransactionView {
     func complete() {
         self.dismiss(animated: true)
     }
-
 }

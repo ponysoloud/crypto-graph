@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		930CA3BC207D19C60052DAD0 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BB207D19C60052DAD0 /* PieChartView.swift */; };
 		930CA3BE207D1D000052DAD0 /* CGFloat+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */; };
-		930CA3C0207D21AA0052DAD0 /* PiecePath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3BF207D21AA0052DAD0 /* PiecePath.swift */; };
 		930CA3C3207D257A0052DAD0 /* TransactionsChart.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930CA3C2207D257A0052DAD0 /* TransactionsChart.xib */; };
 		930CA3C5207D269E0052DAD0 /* TransactionsChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930CA3C4207D269E0052DAD0 /* TransactionsChart.swift */; };
 		930CA3C8207D3FDD0052DAD0 /* TransactionItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 930CA3C7207D3FDD0052DAD0 /* TransactionItem.xib */; };
@@ -54,6 +53,8 @@
 		9341CC892078055F00A21F7F /* PortfolioNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9341CC882078055F00A21F7F /* PortfolioNavigationController.swift */; };
 		9341CC95207A773800A21F7F /* PortfolioHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9341CC94207A773800A21F7F /* PortfolioHeaderView.xib */; };
 		9341CC97207A774500A21F7F /* PortfolioHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9341CC96207A774500A21F7F /* PortfolioHeaderView.swift */; };
+		93494DC42086313F00E5CA15 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93494DC32086313F00E5CA15 /* UIViewController+Extensions.swift */; };
+		93494DCC208670CE00E5CA15 /* TransactionScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93494DCB208670CE00E5CA15 /* TransactionScreen.swift */; };
 		935F9AF7206C0217008B0E66 /* JsonInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AF6206C0217008B0E66 /* JsonInitializable.swift */; };
 		935F9AFB206C0863008B0E66 /* ManagedContextInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AFA206C0863008B0E66 /* ManagedContextInitializable.swift */; };
 		935F9AFD206C0FFA008B0E66 /* Mapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 935F9AFC206C0FFA008B0E66 /* Mapper.swift */; };
@@ -85,7 +86,6 @@
 		6C034D56A11FE2CF5C550435 /* Pods_crypto_graph.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_crypto_graph.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		930CA3BB207D19C60052DAD0 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
 		930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extensions.swift"; sourceTree = "<group>"; };
-		930CA3BF207D21AA0052DAD0 /* PiecePath.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiecePath.swift; sourceTree = "<group>"; };
 		930CA3C2207D257A0052DAD0 /* TransactionsChart.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionsChart.xib; sourceTree = "<group>"; };
 		930CA3C4207D269E0052DAD0 /* TransactionsChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsChart.swift; sourceTree = "<group>"; };
 		930CA3C7207D3FDD0052DAD0 /* TransactionItem.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionItem.xib; sourceTree = "<group>"; };
@@ -130,6 +130,8 @@
 		9341CC882078055F00A21F7F /* PortfolioNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioNavigationController.swift; sourceTree = "<group>"; };
 		9341CC94207A773800A21F7F /* PortfolioHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = PortfolioHeaderView.xib; path = ../PortfolioHeaderView/PortfolioHeaderView.xib; sourceTree = "<group>"; };
 		9341CC96207A774500A21F7F /* PortfolioHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PortfolioHeaderView.swift; path = ../PortfolioHeaderView/PortfolioHeaderView.swift; sourceTree = "<group>"; };
+		93494DC32086313F00E5CA15 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
+		93494DCB208670CE00E5CA15 /* TransactionScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionScreen.swift; sourceTree = "<group>"; };
 		935F9AF6206C0217008B0E66 /* JsonInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonInitializable.swift; sourceTree = "<group>"; };
 		935F9AFA206C0863008B0E66 /* ManagedContextInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagedContextInitializable.swift; sourceTree = "<group>"; };
 		935F9AFC206C0FFA008B0E66 /* Mapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mapper.swift; sourceTree = "<group>"; };
@@ -180,7 +182,6 @@
 			isa = PBXGroup;
 			children = (
 				930CA3BB207D19C60052DAD0 /* PieChartView.swift */,
-				930CA3BF207D21AA0052DAD0 /* PiecePath.swift */,
 			);
 			path = PieChart;
 			sourceTree = "<group>";
@@ -310,6 +311,7 @@
 				9341CC6F20765FDF00A21F7F /* TransactionsListView.swift */,
 				9341CC742076710900A21F7F /* TransactionsListPresenter.swift */,
 				9341CC72207670F200A21F7F /* TransactionsListViewController.swift */,
+				93494DCB208670CE00E5CA15 /* TransactionScreen.swift */,
 			);
 			path = TransactionList;
 			sourceTree = "<group>";
@@ -359,6 +361,7 @@
 				93219347207A909B00273DAF /* UIColor+Extensions.swift */,
 				93219350207AC38300273DAF /* CGPoint+Extensions.swift */,
 				930CA3BD207D1D000052DAD0 /* CGFloat+Extensions.swift */,
+				93494DC32086313F00E5CA15 /* UIViewController+Extensions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -563,7 +566,6 @@
 				9341CC792076A3F500A21F7F /* PortfolioSession.swift in Sources */,
 				9341CC7020765FDF00A21F7F /* TransactionsListView.swift in Sources */,
 				9341CC7B2077D55B00A21F7F /* PortfolioCoinItem.swift in Sources */,
-				930CA3C0207D21AA0052DAD0 /* PiecePath.swift in Sources */,
 				9321934E207AC2BB00273DAF /* NavigationCustomOperation.swift in Sources */,
 				930CA3CA207D43040052DAD0 /* TransactionItem.swift in Sources */,
 				9341CC5F2075050300A21F7F /* AddTransactionNavigationController.swift in Sources */,
@@ -590,6 +592,7 @@
 				9341CC522073EB6200A21F7F /* EnterTransactionDetailsViewController.swift in Sources */,
 				93C5E2A2206D1B78007ED48E /* ImageManager.swift in Sources */,
 				930CA3C5207D269E0052DAD0 /* TransactionsChart.swift in Sources */,
+				93494DC42086313F00E5CA15 /* UIViewController+Extensions.swift in Sources */,
 				93CC67C2203F0BD600F5BE75 /* ViewController.swift in Sources */,
 				935F9AFB206C0863008B0E66 /* ManagedContextInitializable.swift in Sources */,
 				9341CC852077FD6400A21F7F /* String+Extensions.swift in Sources */,
@@ -598,6 +601,7 @@
 				9341CC6920765F5D00A21F7F /* PortfolioView.swift in Sources */,
 				9341CC4E2073EB3900A21F7F /* EnterTransactionDetailsView.swift in Sources */,
 				93219346207A8F2E00273DAF /* Int+Extensions.swift in Sources */,
+				93494DCC208670CE00E5CA15 /* TransactionScreen.swift in Sources */,
 				930CA3BE207D1D000052DAD0 /* CGFloat+Extensions.swift in Sources */,
 				9341CC572073F26400A21F7F /* AddTransactionPresenter.swift in Sources */,
 				93CC67C0203F0BD600F5BE75 /* AppDelegate.swift in Sources */,
@@ -686,7 +690,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -737,7 +741,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

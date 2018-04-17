@@ -103,5 +103,4 @@ class TransactionItem: UITableViewCell {
         }
         layoutIfNeeded()
     }
-
 }

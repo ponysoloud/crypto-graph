@@ -24,6 +24,7 @@ class PortfolioCoinScreen: UIViewController {
     @IBOutlet private var costLabel: UILabel!
     @IBOutlet private var currentValueLabel: UILabel!
     @IBOutlet private var profitLabel: UILabel!
+    @IBOutlet private var marketLabel: UILabel!
 
     @IBOutlet private var backButton: UIButton!
 
@@ -48,6 +49,7 @@ class PortfolioCoinScreen: UIViewController {
         currentPriceLabel.text = String(price: portfolioItem.currentPrice, appending: priceSuffix)
         averagePriceLabel.text = String(price: portfolioItem.avgBuyPrice)
         changeLabel.text = String(percents: portfolioItem.change1h)
+        marketLabel.text = portfolioItem.market
         amountLabel.text = String(portfolioItem.amount)
         costLabel.text = String(price: portfolioItem.cost)
         currentValueLabel.text = String(price: portfolioItem.currentCost)

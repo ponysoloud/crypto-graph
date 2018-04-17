@@ -84,7 +84,7 @@ class PieChartView: UIView {
 
         for piece in pieces {
 
-            guard piece.value / valueCount > 0.2 else {
+            guard piece.value / valueCount > 0.1 else {
                 continue
             }
 
@@ -106,7 +106,11 @@ class PieChartView: UIView {
 
                 var renderRect = CGRect(origin: .zero, size: textToRender.size(withAttributes: textAttributes))
 
-                renderRect.origin = CGPoint(x: segmentCenter.x - renderRect.size.width * 0.5, y: segmentCenter.y - renderRect.size.height * 0.5)
+                if pieces.count > 1 {
+                    renderRect.origin = CGPoint(x: segmentCenter.x - renderRect.size.width * 0.5, y: segmentCenter.y - renderRect.size.height * 0.5)
+                } else {
+                    renderRect.origin = CGPoint(x: viewCenter.x - renderRect.size.width / 2, y: viewCenter.y - renderRect.size.height / 2)
+                }
 
                 textToRender.draw(in: renderRect, withAttributes: textAttributes)
             }

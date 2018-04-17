@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -47,7 +47,7 @@
                                 <color key="textColor" red="0.38431372549999998" green="0.38431372549999998" blue="0.38431372549999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$345↘" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaG-jS-SnG">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$345" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZaG-jS-SnG">
                                 <rect key="frame" x="132.5" y="17.5" width="70" height="18"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="70" id="AN3-ku-35p"/>
@@ -82,7 +82,7 @@
                             <constraint firstItem="QVF-lj-30d" firstAttribute="leading" secondItem="zfX-z1-ffH" secondAttribute="trailing" constant="25" id="TxE-iz-Mcs"/>
                             <constraint firstItem="Byb-1c-fxk" firstAttribute="top" secondItem="MqO-zZ-zbT" secondAttribute="top" constant="8" id="Wrr-gq-Edz"/>
                             <constraint firstItem="2nb-QT-d44" firstAttribute="centerY" secondItem="7oe-1D-2OB" secondAttribute="centerY" id="ad3-IW-uL0"/>
-                            <constraint firstItem="zfX-z1-ffH" firstAttribute="leading" secondItem="2nb-QT-d44" secondAttribute="trailing" constant="30" id="jYW-R5-cBS"/>
+                            <constraint firstItem="zfX-z1-ffH" firstAttribute="leading" relation="lessThanOrEqual" secondItem="2nb-QT-d44" secondAttribute="trailing" constant="30" id="jYW-R5-cBS"/>
                             <constraint firstItem="2nb-QT-d44" firstAttribute="leading" secondItem="ZaG-jS-SnG" secondAttribute="trailing" constant="7" id="kaO-sw-EwZ"/>
                             <constraint firstAttribute="bottom" secondItem="Byb-1c-fxk" secondAttribute="bottom" constant="9" id="m9H-aV-wB7"/>
                             <constraint firstAttribute="bottom" secondItem="7oe-1D-2OB" secondAttribute="bottom" constant="14" id="tDT-mY-vEx"/>

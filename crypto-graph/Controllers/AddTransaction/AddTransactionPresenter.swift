@@ -50,6 +50,7 @@ class AddTransactionPresenter {
             }
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                print("show")
                 self.view?.complete()
             }
         }

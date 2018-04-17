@@ -58,8 +58,6 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
         portfolioTableView.dataSource = self
         portfolioTableView.addSubview(self.refreshControl)
 
-
-
         /*
         swipeGestureBlocking = false
 
@@ -145,7 +143,6 @@ class PortfolioViewController: UIViewController, TabBarChildViewController {
 extension PortfolioViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("IN NUMBER \(portfolioData.count)")
         return portfolioData.count
     }
 
@@ -245,6 +242,7 @@ extension PortfolioViewController: PortfolioView {
     }
 
     func append(_ newObject: CoinTransactionsViewData) {
+        print("append")
 
         let task = {
             self.portfolioTableView.beginUpdates()
@@ -265,7 +263,14 @@ extension PortfolioViewController: PortfolioView {
     }
 
     func updateObject(existingAt index: Int, with object: CoinTransactionsViewData) {
+        print("update")
+
         let task = {
+            guard index < self.portfolioData.count else {
+                print("\(index) >= \(self.portfolioData.count)")
+                return
+            }
+
             self.portfolioTableView.beginUpdates()
 
             self.portfolioData[index] = object
@@ -276,7 +281,7 @@ extension PortfolioViewController: PortfolioView {
             self.portfolioTableView.endUpdates()
         }
 
-        if (self.isViewLoaded && self.view.window != nil){
+        if (self.isViewLoaded && self.view.window != nil && index < portfolioData.count) {
             task()
         } else {
             tableViewOperations.append(task)

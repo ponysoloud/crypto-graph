@@ -37,11 +37,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         addTransactionVC.tabBarItem = UITabBarItem(title: "Add transaction", image: #imageLiteral(resourceName: "plus_tabbar"), tag: 1)
 
 
-        let _transactionsVC = ControllerHelper.instantiateViewController(identifier: "TransactionsListViewController")
-        guard let transactionsVC = _transactionsVC as? TransactionsListViewController else {
+        let _transactionsVC = ControllerHelper.instantiateViewController(identifier: "TransactionListNavigationController")
+        guard let transactionsVC = _transactionsVC as? PortfolioNavigationController else {
             fatalError()
         }
         transactionsVC.tabBarItem = UITabBarItem(title: "Transactions", image: #imageLiteral(resourceName: "pie_tabbar"), tag: 2)
+        transactionsVC.customTransitionCoordinator = TransitionCoordinator(animator: NavigationCustomAnimator())
 
 
         let tabBarController = CustomTabBarController()

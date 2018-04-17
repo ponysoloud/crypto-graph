@@ -89,7 +89,6 @@ class PortfolioSession: NSObject {
             print($0)
         })
     }
-
 }
 
 extension PortfolioSession: NSFetchedResultsControllerDelegate {
@@ -114,6 +113,8 @@ extension PortfolioSession: NSFetchedResultsControllerDelegate {
 extension PortfolioSession: PortfolioDataControllerDelegate {
     
     func controller(_ controller: PortfolioDataController, didChange coinTransactionsObject: CoinTransactionsData, at index: Int) {
+        print("chaaaaange")
+
         requestForCoinTransactionsDataPrice(coinTransactionsObject)
         delegate?.portfolio(self, didChange: coinTransactionsObject, at: index)
     }

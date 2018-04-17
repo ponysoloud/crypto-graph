@@ -15,12 +15,13 @@ class EnterTransactionDetailsViewController: UIViewController {
 
     var transactionDelegate: AddTransactionNavigationControllerDelegate?
 
-    @IBOutlet fileprivate var transactionTypeTextField: UITextField!
-    @IBOutlet fileprivate var quantityTextField: UITextField!
-    @IBOutlet fileprivate var priceTextField: UITextField!
+    @IBOutlet private var transactionTypeTextField: UITextField!
+    @IBOutlet private var marketTextField: UITextField!
+    @IBOutlet private var quantityTextField: UITextField!
+    @IBOutlet private var priceTextField: UITextField!
 
-    @IBOutlet fileprivate var dateTextField: UITextField!
-    @IBOutlet fileprivate var datePicker: UIDatePicker!
+    @IBOutlet private var dateTextField: UITextField!
+    @IBOutlet private var datePicker: UIDatePicker!
 
     @IBOutlet private var backButton: UIButton!
     @IBOutlet private var leaveButton: UIButton!
@@ -31,6 +32,8 @@ class EnterTransactionDetailsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        addHidingKeyboardOnTap()
 
         presenter?.setup()
 
@@ -46,9 +49,11 @@ class EnterTransactionDetailsViewController: UIViewController {
 
         quantityTextField.delegate = self
         priceTextField.delegate = self
+        marketTextField.delegate = self
 
         quantityTextField.tag = 1
         priceTextField.tag = 2
+        marketTextField.tag = 3
 
         backButton.addTarget(self, action: #selector(moveBack(_:)), for: .touchUpInside)
         leaveButton.addTarget(self, action: #selector(leaveSession(_:)), for: .touchUpInside)
@@ -144,6 +149,9 @@ extension EnterTransactionDetailsViewController: UITextFieldDelegate {
             }
             
             presenter?.setTransaction(price: value)
+            return true
+        case 3:
+            presenter?.setTransaction(market: new == "" ? nil : new)
             return true
         default:
             return true

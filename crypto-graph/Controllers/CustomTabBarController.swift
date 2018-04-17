@@ -44,7 +44,7 @@ class CustomTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
 
     func setViewControllers(_ viewControllers: [TabBarChildViewController]) {
-        let vcs = viewControllers.flatMap {
+        let vcs = viewControllers.compactMap {
             $0 as? UIViewController
         }
 

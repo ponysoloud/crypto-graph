@@ -22,7 +22,7 @@ class LargeButton: UIButton {
     }
 
     private func setupStyle() {
-        var textSize: CGFloat = 34.0
+        let textSize: CGFloat = 34.0
 
         self.titleLabel?.font = UIFont.systemFont(ofSize: textSize, weight: .regular)
         self.titleLabel?.numberOfLines = 0

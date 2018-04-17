@@ -22,6 +22,8 @@ protocol EnterTransactionDetailsViewPresenter: class {
 
     func setTransaction(currency: Price.CurrencyType)
 
+    func setTransaction(market: String?)
+
     func moveBack()
 
     func setup()

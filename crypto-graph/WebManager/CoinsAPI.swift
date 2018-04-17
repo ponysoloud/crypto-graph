@@ -55,6 +55,4 @@ final class CoinsAPI: APIEndpoint {
 
         request(path: "coins/coin/price/\(coin.symbol)", parameters: [:], success: succ, failure: failure)
     }
-    
-
 }

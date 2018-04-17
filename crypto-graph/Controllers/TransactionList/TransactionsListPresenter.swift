@@ -95,7 +95,7 @@ class TransactionsListPresenter: NSObject {
     }
 
     private func buildViewData(from transaction: Transaction) -> TransactionViewData {
-        return TransactionViewData(coinImage: transaction.coin.image, coinName: transaction.coin.fullname, type: transaction.type.string, price: transaction.price.value, quantity: transaction.quantity)
+        return TransactionViewData(coinImage: transaction.coin.image, coinName: transaction.coin.fullname, type: transaction.type.string, price: transaction.price.value, quantity: transaction.quantity, market: transaction.market, date: DateFormatter.custom.string(from: transaction.date))
     }
 }
 
@@ -139,6 +139,9 @@ struct TransactionViewData {
     let type: String
     let price: Float
     let quantity: Float
+
+    let market: String
+    let date: String
 }
 
 struct CoinChartData {

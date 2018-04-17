@@ -58,7 +58,7 @@ class PortfolioPresenter {
     }
 
     private func buildViewData(from data: CoinTransactionsData) -> CoinTransactionsViewData {
-        let viewData = CoinTransactionsViewData(coinImage: data.coin.image, coinName: data.coin.fullname, currentPrice: data.coin.price, change1h: data.coin.percentChange1h, currentCost: data.currentCost, amount: data.amount, avgBuyPrice: data.avgBuyPrice, cost: data.cost, profit: data.profit)
+        let viewData = CoinTransactionsViewData(coinImage: data.coin.image, coinName: data.coin.fullname, currentPrice: data.coin.price, change1h: data.coin.percentChange1h, currentCost: data.currentCost, market: data.markets, amount: data.amount, avgBuyPrice: data.avgBuyPrice, cost: data.cost, profit: data.profit)
 
         return viewData
     }
@@ -90,6 +90,8 @@ extension PortfolioPresenter: PortfolioSessionDelegate {
     func portfolio(_ portfolio: PortfolioSession, didRemove coinTransactionsObject: CoinTransactionsData, from index: Int) {
         DispatchQueue.main.async {
             self.view?.remove(at: index)
+
+            self.updateHeader()
         }
 
         print("REMOVE: - coin: \(coinTransactionsObject.coin.name)")
@@ -104,6 +106,8 @@ struct CoinTransactionsViewData {
     let currentPrice: Float?
     let change1h: Float?
     let currentCost: Float?
+
+    let market: String
 
     let amount: Float
     let avgBuyPrice: Float

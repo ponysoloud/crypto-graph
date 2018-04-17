@@ -78,10 +78,22 @@ class TransactionCreatingSession {
             }
         }
     }
+    var market: String? {
+        get {
+            return propertiesDict[.MarketKey] as? String
+        }
+        set {
+            if let new = newValue {
+                propertiesDict[.MarketKey] = new
+            } else {
+                propertiesDict.removeValue(forKey: .MarketKey)
+            }
+        }
+    }
     var currency: Price.CurrencyType = .usd
 
     enum PropertiesKey: Int {
-        case CoinKey = 0, TypeKey, QuantityKey, DateKey, PriceKey
+        case CoinKey = 0, TypeKey, QuantityKey, DateKey, PriceKey, MarketKey
     }
 
     private var propertiesDict: [PropertiesKey: Any] = [:] {
@@ -96,7 +108,7 @@ class TransactionCreatingSession {
     }
 
     var isComplete: Bool {
-        for i in 0...4 {
+        for i in 0...5 {
             guard let key = PropertiesKey(rawValue: i), let value = propertiesDict[key] else {
                 print("Error for: \(PropertiesKey(rawValue: i)!)")
                 return false
@@ -115,7 +127,7 @@ class TransactionCreatingSession {
         }
 
         context.performChanges {
-            let transaction = Transaction.insert(into: self.context, coin: self.coin!, type: self.type!, quantity: self.quantity!, date: self.date!, price: self.price!, currencyType: self.currency)
+            let transaction = Transaction.insert(into: self.context, coin: self.coin!, type: self.type!, quantity: self.quantity!, date: self.date!, price: self.price!, market: self.market!, currencyType: self.currency)
             completion(transaction)
         }
     }

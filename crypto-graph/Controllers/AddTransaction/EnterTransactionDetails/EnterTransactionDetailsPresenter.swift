@@ -50,6 +50,10 @@ class EnterTransactionDetailsPresenter: EnterTransactionDetailsViewPresenter {
         transactionCreatingSession.currency = currency
     }
 
+    func setTransaction(market: String?) {
+        transactionCreatingSession.market = market
+    }
+
     func moveBack() {
         transactionCreatingSession.clearDetails()
         view?.moveBack()
